@@ -19,10 +19,11 @@ public class CategoryPage {
         this.driver = driver;
     }
 
-    public void selectTwoExpensiveItems(){
+    public void selectTwoExpensiveItems() throws InterruptedException {
         driver.findElement(locators.sortingOptionsOpen).click();
         driver.findElement(locators.radioButtomPriceHighToLow).click();
         driver.findElement(locators.sortingOptionsClose).click();
+        Thread.sleep(2000);
         Actions actions = new Actions(driver);
         WebElement firstItem = driver.findElement(locators.firstExpensiveItem);
         actions.moveToElement(firstItem);
