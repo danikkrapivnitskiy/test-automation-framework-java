@@ -1,8 +1,6 @@
-package task_2;
+package com.regiojet;
 
 import org.openqa.selenium.WebDriver;
-
-import java.time.Duration;
 
 public class Browser {
 
@@ -13,9 +11,8 @@ public class Browser {
         this.driver=driver;
     }
 
-
     public void setUpPage() {
-        driver.get("https://www.ikea.com/cz/en/cat/desks-computer-desks-20649/");
+        driver.get("https://regiojet.com");
         if (driver.findElement(locators.acceptCookies).isDisplayed()){
             driver.findElement(locators.acceptCookies).click();
         }
@@ -23,6 +20,6 @@ public class Browser {
 
     public void quitDriver() throws InterruptedException {
         Thread.sleep(2000);
-        driver.quit();
+        driver.close();
     }
 }
