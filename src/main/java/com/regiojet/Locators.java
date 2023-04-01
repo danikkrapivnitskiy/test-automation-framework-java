@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 
 public class Locators {
 
-    SearchPage searchPage;
-
     public final By from = By.xpath("//input[@aria-label='From']");
     public final By to = By.xpath("//input[@aria-label='To']");
     public final By confirm = By.xpath("//div[@class='react-select__option css-1oxt1zm-option'][1]");
