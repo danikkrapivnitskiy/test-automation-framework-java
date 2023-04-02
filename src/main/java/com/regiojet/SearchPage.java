@@ -24,19 +24,16 @@ public class SearchPage {
         List<WebElement> elements = driver.findElements(locator);
         Assert.assertTrue("No trips available for the selected route", elements.size() > 0);
         List<LocalTime> localTimes = new ArrayList<>();
-        List<WebElement> elements2 = driver.findElements(locators.selectItem);
         LocalTime minTime = null;
 
         for (int i = 0; i < elements.size(); i++) {
             WebElement element = elements.get(i);
-            WebElement element2 = elements2.get(i);
             String timeStr = element.getText();
-            String priceStr = element2.getText();
             LocalTime time = LocalTime.parse(timeStr.substring(0, 5));
-            String numberOnly = priceStr.replaceAll("\\D+", "");
-            if (numberOnly.isEmpty()) {
-                localTimes.add(LocalTime.MAX);
-            } else localTimes.add(time);
+            WebElement checkAvailable = driver.findElement(By.xpath(locators.selectItem.toString().substring(9) + "[" + (i + 1) + "]"));
+            if (checkAvailable.isEnabled()) {
+                localTimes.add(time);
+            } else localTimes.add(LocalTime.MAX);
         }
 
         for (LocalTime timeString : localTimes) {

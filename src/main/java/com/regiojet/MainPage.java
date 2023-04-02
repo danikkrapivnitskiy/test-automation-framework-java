@@ -20,6 +20,7 @@ public class MainPage {
         Thread.sleep(1000);
         driver.findElement(locators.to).sendKeys(Keys.ENTER);
         driver.findElement(locators.departure).click();
+        Thread.sleep(500);
         driver.findElement(locators.mondayDeparture).click();
         driver.findElement(locators.search).submit();
     }
