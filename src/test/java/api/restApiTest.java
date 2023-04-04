@@ -26,7 +26,7 @@ public class restApiTest {
     @Test
     public void FollowersRestApiTest() {
 
-        User[] followers = userController.getFollowersByUsrname("Dan");
+        User[] followers = userController.getFollowersByUsrname("Mak0");
         System.out.println(followers.length);
         assertTrue(followers.length > 0);
     }

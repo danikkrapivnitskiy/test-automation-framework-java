@@ -24,7 +24,7 @@ public class UserController {
 
     public User[] getFollowersByUsrname(String username) {
         try {
-            return restTemplate.getForObject(API_BASE + "/users" + username + "/followers", User[].class);
+            return restTemplate.getForObject(API_BASE + "/users/" + username + "/followers", User[].class);
         } catch (Exception ex) {
             throw new RuntimeException();
         }
