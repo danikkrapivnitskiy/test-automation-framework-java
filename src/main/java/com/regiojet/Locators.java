@@ -7,10 +7,8 @@ public class Locators {
     public final By from = By.xpath("//input[@aria-label='From']");
     public final By to = By.xpath("//input[@aria-label='To']");
     public final By confirm = By.xpath("//div[@class='react-select__option css-1oxt1zm-option'][1]");
-    public final By tomorrow = By.xpath("//button[@class='inline-flex items-center justify-center px-2.5 rounded-sm font-bold " +
-            "transition focus:outline-none focus-visible:outline-none focus-visible:shadow-border hover:shadow-modal cursor-pointer " +
-            "bg-white text-primary-blue border border-primary-blue hover:text-secondary-bluedark hover:border-secondary-bluedark " +
-            "focus-visible:text-secondary-bluedark focus-visible:border-secondary-bluedark h-5 mt-1 mr-1'][2]");
+    public final By tomorrow = By.xpath("(//div[@class='inline-block p-3 searchBox-mob-container']//button)[2]");
+    public final By today = By.xpath("(//div[@class='inline-block p-3 searchBox-mob-container']//button)[1]");
     public final By search = By.xpath("//button[@class='inline-flex items-center justify-center " +
             "px-2.5 rounded-sm font-bold transition focus:outline-none focus-visible:outline-none focus-visible:shadow-border " +
             "hover:shadow-modal cursor-pointer bg-primary-blue text-white border-none hover:bg-secondary-bluedark " +
