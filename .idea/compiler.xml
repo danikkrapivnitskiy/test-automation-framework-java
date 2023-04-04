@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Home_project" />
         <module name="RegioJet" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
+      <module name="RefioJet" target="11" />
       <module name="Roivenue" target="11" />
     </bytecodeTargetLevel>
   </component>
