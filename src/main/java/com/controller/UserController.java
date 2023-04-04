@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.api.User;
 import org.springframework.web.client.RestTemplate;
 
 public class UserController {
