@@ -76,6 +76,7 @@ public class RegioJetApi {
                 .get(URL + LOCATION_PATH)
                 .then()
                 .statusCode(200)
-                .extract().body().jsonPath().getInt("find { it.cities.find { it.name == '" + cityName + "' } }.cities.find { it.name == '" + cityName + "' }.id");
+                .extract().body().jsonPath().getInt("find { it.cities.find { it.name == '" + cityName
+                        + "' } }.cities.find { it.name == '" + cityName + "' }.id");
     }
 }
