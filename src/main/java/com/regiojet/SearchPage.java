@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SearchPage {
@@ -54,11 +53,15 @@ public class SearchPage {
         return minIndex;
     }
 
-    public void selectItem(int i) {
-        driver.findElement(By.xpath(locators.selectItem.toString().substring(9) + "[" + (i + 1) + "]")).click();
+    public void selectItem(int index) {
+        List<WebElement> elements = driver.findElements(locators.selectItem);
+        Assert.assertFalse("No trips available for the selected route", elements.isEmpty());
+        Assert.assertTrue("Invalid index: " + index, index >= 0 && index < elements.size());
+
+        elements.get(index).click();
     }
 
-    public int price(String value) {
+    public int price() {
         List<WebElement> elements = driver.findElements(locators.selectItem);
         Assert.assertTrue("No trips available for the selected route", elements.size() > 0);
         List<Integer> priceList = new ArrayList<>();

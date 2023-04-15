@@ -3,7 +3,6 @@ package com.regiojet;
 
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class RegioJetFrontTest {
@@ -50,7 +49,7 @@ public class RegioJetFrontTest {
         browser.setUpPage();
         mainPage.searchDestination("Ostrava", "Brno");
 
-        searchPage.selectItem(searchPage.price("Min"));
+        searchPage.selectItem(searchPage.price());
     }
 
 }
