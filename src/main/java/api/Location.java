@@ -26,7 +26,7 @@ public class Location {
     public static String getNextMondayDate() {
         LocalDate now = LocalDate.now();
         int daysUntilMonday = DayOfWeek.MONDAY.getValue() - now.getDayOfWeek().getValue();
-        if (daysUntilMonday <= 0) {
+        if (daysUntilMonday != 0) {
             daysUntilMonday += 7;
         }
         LocalDate nextMonday = now.plusDays(daysUntilMonday);
