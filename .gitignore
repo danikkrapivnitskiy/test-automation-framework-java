@@ -1,3 +1,5 @@
 .allure/
 allure-results/
 target/
+chrome-win64/
+chromedriver-win64/

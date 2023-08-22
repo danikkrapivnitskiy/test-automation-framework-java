@@ -9,4 +9,7 @@
 
 ** Tests were created used Java, Selenium and Rest Assured
 
-* For correct work you need to be downloaded folder Driver in repository and have Java 11
+* For correct work you need to:
+1. Download the repository and upload dependencies
+2. Download Chrome driver and Chrome Browser from website https://googlechromelabs.github.io/chrome-for-testing/ that suit for your preferencies and requirements of system and unzip them to the folder "driver" in the root
+3. Verify you have Java 11
