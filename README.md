@@ -9,4 +9,4 @@
 
 ** Tests were created used Java, Selenium and Rest Assured
 
-* For correct work you need to download Testing Chrome Browser v.114 and remove Auto Update
+* For correct work you need to be downloaded folder Driver in repository and have Java 11
