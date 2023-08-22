@@ -1,5 +1,6 @@
-package com.regiojet;
+package browser;
 
+import com.regiojet.Locators;
 import org.openqa.selenium.WebDriver;
 
 public class Browser {

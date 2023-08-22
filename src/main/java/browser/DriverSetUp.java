@@ -1,4 +1,4 @@
-package com.regiojet;
+package browser;
 
 import org.openqa.selenium.WebDriver;
 

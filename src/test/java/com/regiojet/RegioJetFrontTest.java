@@ -1,6 +1,8 @@
 package com.regiojet;
 
 
+import browser.Browser;
+import browser.DriverSetUp;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 
