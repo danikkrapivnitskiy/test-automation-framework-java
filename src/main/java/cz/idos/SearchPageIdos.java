@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,13 +70,23 @@ public class SearchPageIdos{
         List<WebElement> elementsDate = driver.findElements(locators.timeAndDateDeparture);
         LocalTime eightAM = LocalTime.of(8, 0);
         LocalDate tomorrow = LocalDate.now().plusDays(1);
+        LocalDate currentDate = LocalDate.now();
+        int year;
         Assert.assertTrue("No trips available for the selected route ", elementsDate.size() > 0);
         for (int i = 0; i < elementsDate.size(); i++) {
             WebElement element = elementsDate.get(i);
             String dateAndTime = element.getText();
-            LocalTime time = LocalTime.parse(dateAndTime.substring(0, 4), DateTimeFormatter.ofPattern("hh:mm"));
+            LocalTime time = LocalTime.parse(dateAndTime.substring(0,4), DateTimeFormatter.ofPattern("H:mm"));
             Assert.assertTrue("Time is earlier than 8AM ", time.equals(eightAM) || time.isAfter(eightAM));
-            LocalDate date = LocalDate.parse(dateAndTime.substring(5, 8), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if (currentDate.isEqual(currentDate.with(TemporalAdjusters.lastDayOfYear()))) {
+                year = currentDate.getYear() + 1;
+            } else {
+                year = currentDate.getYear();
+
+            }
+
+            LocalDate date = LocalDate.parse(dateAndTime.substring(4, 8) + "." + year, DateTimeFormatter.ofPattern("d.M.yyyy"));
+
             Assert.assertTrue("Date is not tomorrow ", date.isEqual(tomorrow));
         }
     }
