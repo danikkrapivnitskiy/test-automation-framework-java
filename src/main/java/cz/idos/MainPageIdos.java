@@ -3,17 +3,10 @@ package cz.idos;
 import main.MethodsMainPage;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class MainPageIdos extends MethodsMainPage {
 
     WebDriver driver;
     LocatorsIdos locators = new LocatorsIdos();
-
-    Date date = new Date();
-    Calendar calendar = Calendar.getInstance();
-
     public MainPageIdos(WebDriver driver){
         super(driver);
         this.driver=driver;

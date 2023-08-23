@@ -1,18 +1,15 @@
 package cz.idos;
 
-import main.MethodsSearchPage;
-import org.asynchttpclient.util.Assertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPageIdos{
@@ -24,46 +21,33 @@ public class SearchPageIdos{
         this.driver = driver;
     }
 
-    public int informationOfTrip() {
-//        List<WebElement> elements = driver.findElements(locator);
-//        Assert.assertTrue("No trips available for the selected route", elements.size() > 0);
-//        List<LocalTime> localTimes = new ArrayList<>();
-//        LocalTime minTime = null;
-//
-//        for (int i = 0; i < elements.size(); i++) {
-//            WebElement element = elements.get(i);
-//            String timeStr = element.getText();
-//            LocalTime time = LocalTime.parse(timeStr.substring(0, 5));
-//            WebElement checkAvailable = driver.findElement(By.xpath(locators.selectItem.toString().substring(9) + "[" + (i + 1) + "]"));
-//            if (checkAvailable.isEnabled()) {
-//                localTimes.add(time);
-//            } else localTimes.add(LocalTime.MAX);
-//        }
-//
-//        for (LocalTime timeString : localTimes) {
-//            if (!timeString.equals(LocalTime.MAX) && (minTime == null || timeString.isBefore(minTime))) {
-//                minTime = timeString;
-//            }
-//        }
-//
-//        int minIndex = localTimes.indexOf(minTime);
-//
-//        Assertions.assertNotNull(minIndex, "No trip found with the shortest duration");
-//
-//        System.out.println("Departure and arrival time: " +
-//                driver.findElement(By.xpath(locators.timeDepartureAndArrival.toString().substring(9) + "[" + (minIndex + 1) + "]")).getText());
-//        System.out.println("Price of direction " +
-//                driver.findElement(By.xpath(locators.selectItem.toString().substring(9) + "[" + (minIndex + 1) + "]")).getText());
-//
-//        return minIndex;
-
+    public void informationOfTrip() {
         List<WebElement> elementsDetails = driver.findElements(locators.detailOfTrip);
         Assert.assertTrue("No trips available for the selected route ", elementsDetails.size() > 0);
-        int count;
-        for (count = 0; count < elementsDetails.size(); count++) {
+        for (int count = 0; count < elementsDetails.size(); count++) {
             elementsDetails.get(count).click();
+            List<WebElement> priceError = driver.findElements(locators.priceErrorMsg);
+            Assert.assertFalse("Price is not available", priceError.size() != 0);
+            List<WebElement> time = driver.findElements(By.xpath(locators.connectionDetails.toString().substring(9) + "[" + (count + 1) + "]" + "/li"
+                    + locators.timeOfStation.toString().substring(9)));
+            LocalTime timeDeparture = LocalTime.parse(time.get(0).getText(), DateTimeFormatter.ofPattern("H:mm"));
+            LocalTime timeArrival= LocalTime.parse(time.get(time.size() - 1).getText(), DateTimeFormatter.ofPattern("H:mm"));
+
+            List<WebElement> name = driver.findElements(By.xpath(locators.connectionDetails.toString().substring(9) + "[" + (count + 1) + "]" + "/li"
+                    + locators.nameOfStation.toString().substring(9)));
+
+            System.out.println("Direction " + (count + 1));
+            System.out.println("Number of stop is: " + time.size());
+            for (int i = 0; i < time.size(); i++) {
+                String timeStrDeparture = time.get(i).getText();
+                System.out.println((i + 1) + ": Time of station " + name.get(i).getText() + " is " + timeStrDeparture);
+            }
+
+            Duration duration = Duration.between(timeDeparture, timeArrival);
+            System.out.println("Time of travel : " + duration.toHours() + " hours " + duration.toMinutesPart() + " minutes ");
+
+            System.out.println("Price is : " + driver.findElements(locators.price).get(count + 1).getText());
         }
-        return count;
     }
 
     public void verifyDateAndTime() {
@@ -89,48 +73,5 @@ public class SearchPageIdos{
 
             Assert.assertTrue("Date is not tomorrow ", date.isEqual(tomorrow));
         }
-    }
-
-    public void selectItem(int index) {
-        List<WebElement> elements = driver.findElements(locators.selectItem);
-        Assert.assertFalse("No trips available for the selected route", elements.isEmpty());
-        Assert.assertTrue("Invalid index: " + index, index >= 0 && index < elements.size());
-
-        elements.get(index).click();
-    }
-
-    public int price() {
-        List<WebElement> elements = driver.findElements(locators.selectItem);
-        Assert.assertTrue("No trips available for the selected route", elements.size() > 0);
-        List<Integer> priceList = new ArrayList<>();
-        Integer lowestPrice = Integer.MAX_VALUE;
-
-        for (WebElement element : elements) {
-            String priceStr = element.getText();
-            String numberOnly = priceStr.replaceAll("\\D+", "");
-            if (numberOnly.isEmpty()) {
-                priceList.add(0);
-            } else {
-                int valueOfNumber = Integer.parseInt(numberOnly);
-                priceList.add(valueOfNumber);
-            }
-        }
-
-        for (int i : priceList) {
-            if (i != 0 && i < lowestPrice) {
-                lowestPrice = i;
-            }
-        }
-
-        Assertions.assertNotNull(lowestPrice, "No trip found");
-
-        int indexPrice = priceList.indexOf(lowestPrice);
-
-        System.out.println("Departure and arrival time: " +
-                driver.findElement(By.xpath(locators.timeDepartureAndArrival.toString().substring(9) + "[" + (indexPrice + 1) + "]")).getText());
-        System.out.println("Price of direction " +
-                driver.findElement(By.xpath(locators.selectItem.toString().substring(9) + "[" + (indexPrice + 1) + "]")).getText());
-
-        return indexPrice;
     }
 }

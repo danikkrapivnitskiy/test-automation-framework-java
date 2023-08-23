@@ -3,13 +3,11 @@ package cz.idos;
 
 import browser.Browser;
 import browser.DriverSetUp;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class IdosTest {
@@ -37,18 +35,19 @@ public class IdosTest {
     }
 
     @Test
-    public void tomorrowConnections() throws Exception {
+    public void verifyDateAndTime() throws Exception {
         browser.setUpPage(URL);
         mainPage.searchDestination("Praha", "Brno");
 
         searchPage.verifyDateAndTime();
     }
 
-//    @Test
-//    public void setBrowser() {
-//        WebDriverManager.chromedriver().;
-//        WebDriver driver1 = new ChromeDriver();
-//        driver1.get("https://www.idos.cz/");
-//    }
+    @Test
+    public void informationOfTrip() throws InterruptedException {
+        browser.setUpPage(URL);
+        mainPage.searchDestination("Praha", "Brno");
+
+        searchPage.informationOfTrip();
+    }
 
 }
