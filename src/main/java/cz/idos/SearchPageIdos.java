@@ -46,7 +46,7 @@ public class SearchPageIdos{
             Duration duration = Duration.between(timeDeparture, timeArrival);
             System.out.println("Time of travel : " + duration.toHours() + " hours " + duration.toMinutesPart() + " minutes ");
 
-            System.out.println("Price is : " + driver.findElements(locators.price).get(count + 1).getText());
+            System.out.println("Price is : " + driver.findElements(locators.price).get(count).getText());
         }
     }
 
