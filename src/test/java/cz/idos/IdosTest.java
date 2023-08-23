@@ -20,21 +20,21 @@ public class IdosTest {
     SearchPageIdos searchPage = new SearchPageIdos(driver);
     String URL = "https://www.idos.cz/";
 
-//    @BeforeClass
-//    public static void setUpDriver() throws Exception {
-//        driver = DriverSetUp.setUpDriver("chrome");
-//    }
-//
-//    @After
-//    public void quitDriver() throws Exception {
-//        browser.quitDriver();
-//        setUpDriver();
-//    }
-//
-//    @AfterClass
-//    public static void closeDriver() {
-//        driver.close();
-//    }
+    @BeforeClass
+    public static void setUpDriver() throws Exception {
+        driver = DriverSetUp.setUpDriver("chrome");
+    }
+
+    @After
+    public void quitDriver() throws Exception {
+        browser.quitDriver();
+        setUpDriver();
+    }
+
+    @AfterClass
+    public static void closeDriver() {
+        driver.close();
+    }
 
     @Test
     public void tomorrowConnections() throws Exception {
@@ -44,11 +44,11 @@ public class IdosTest {
         searchPage.verifyDateAndTime();
     }
 
-    @Test
-    public void setBrowser() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver1 = new ChromeDriver();
-        driver1.get("https://www.idos.cz/");
-    }
+//    @Test
+//    public void setBrowser() {
+//        WebDriverManager.chromedriver().;
+//        WebDriver driver1 = new ChromeDriver();
+//        driver1.get("https://www.idos.cz/");
+//    }
 
 }
