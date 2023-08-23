@@ -1,21 +1,37 @@
 package browser;
 
-import com.regiojet.Locators;
+import com.regiojet.LocatorsRegioJet;
+import cz.idos.LocatorsIdos;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class Browser {
 
     WebDriver driver ;
-    Locators locators = new Locators();
+    LocatorsRegioJet locatorsRegioJet = new LocatorsRegioJet();
+    LocatorsIdos locatorsIdos = new LocatorsIdos();
 
     public Browser(WebDriver driver){
         this.driver=driver;
     }
 
-    public void setUpPage() {
-        driver.get("https://regiojet.com");
-        if (driver.findElement(locators.acceptCookies).isDisplayed()){
-            driver.findElement(locators.acceptCookies).click();
+    public void setUpPage(String link) {
+        driver.get(link);
+        try {
+            WebElement regioJetCookiesButton = driver.findElement(locatorsRegioJet.acceptCookies);
+            if (regioJetCookiesButton.isDisplayed()) {
+                regioJetCookiesButton.click();
+            }
+        } catch (NoSuchElementException e) {
+            try {
+                WebElement idosCookiesButton = driver.findElement(locatorsIdos.acceptCookies);
+                if (idosCookiesButton.isDisplayed()) {
+                    idosCookiesButton.click();
+                }
+            } catch (NoSuchElementException ex) {
+
+            }
         }
     }
 

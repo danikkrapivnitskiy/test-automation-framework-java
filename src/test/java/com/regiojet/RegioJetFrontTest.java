@@ -9,10 +9,12 @@ import org.openqa.selenium.WebDriver;
 
 public class RegioJetFrontTest {
     static WebDriver driver;
-    Locators locators = new Locators();
+    LocatorsRegioJet locators = new LocatorsRegioJet();
     Browser browser = new Browser(driver);
-    MainPage mainPage = new MainPage(driver);
-    SearchPage searchPage = new SearchPage(driver);
+    MainPageRegioJet mainPage = new MainPageRegioJet(driver);
+    SearchPageRegioJet searchPage = new SearchPageRegioJet(driver);
+
+    String URL = "https://regiojet.com";
 
     @BeforeClass
     public static void setUpDriver() throws Exception {
@@ -32,26 +34,28 @@ public class RegioJetFrontTest {
 
     @Test
     public void shortestDirection() throws Exception {
-        browser.setUpPage();
-        mainPage.searchDestination("Ostrava", "Brno");
+        searchDestination();
 
         searchPage.selectItem(searchPage.takeDirection(locators.timeDuration));
     }
 
     @Test
     public void earliestDirection() throws Exception {
-        browser.setUpPage();
-        mainPage.searchDestination("Ostrava", "Brno");
+        searchDestination();
 
         searchPage.selectItem(searchPage.takeDirection(locators.timeDepartureAndArrival));
     }
 
     @Test
     public void lowestPrice() throws Exception {
-        browser.setUpPage();
-        mainPage.searchDestination("Ostrava", "Brno");
+        searchDestination();
 
         searchPage.selectItem(searchPage.price());
+    }
+
+    private void searchDestination() throws InterruptedException {
+        browser.setUpPage(URL);
+        mainPage.searchDestination("Ostrava", "Brno");
     }
 
 }

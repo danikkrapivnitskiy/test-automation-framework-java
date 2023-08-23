@@ -2,7 +2,7 @@ package com.regiojet;
 
 import org.openqa.selenium.By;
 
-public class Locators {
+public class LocatorsRegioJet {
 
     public final By from = By.xpath("//input[@aria-label='From']");
     public final By to = By.xpath("//input[@aria-label='To']");

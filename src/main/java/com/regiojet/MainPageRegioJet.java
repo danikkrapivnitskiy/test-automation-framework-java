@@ -1,23 +1,26 @@
 package com.regiojet;
 
+import main.MethodsMainPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainPage {
+public class MainPageRegioJet extends MethodsMainPage {
 
     WebDriver driver;
-    Locators locators = new Locators();
+    LocatorsRegioJet locators = new LocatorsRegioJet();
 
     Date date = new Date();
     Calendar calendar = Calendar.getInstance();
 
-    public MainPage(WebDriver driver){
+    public MainPageRegioJet(WebDriver driver){
+        super(driver);
         this.driver=driver;
     }
 
+    @Override
     public void searchDestination(String from, String to) throws InterruptedException {
         calendar.setTime(date);
 

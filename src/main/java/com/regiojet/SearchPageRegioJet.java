@@ -1,5 +1,6 @@
 package com.regiojet;
 
+import main.MethodsSearchPage;
 import org.asynchttpclient.util.Assertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -10,15 +11,17 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchPage {
+public class SearchPageRegioJet extends MethodsSearchPage {
 
     WebDriver driver;
-    Locators locators = new Locators();
+    LocatorsRegioJet locators = new LocatorsRegioJet();
 
-    public SearchPage(WebDriver driver) {
+    public SearchPageRegioJet(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 
+    @Override
     public int takeDirection(By locator) {
         List<WebElement> elements = driver.findElements(locator);
         Assert.assertTrue("No trips available for the selected route", elements.size() > 0);
