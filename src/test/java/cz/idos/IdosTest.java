@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 
 public class IdosTest {
     static WebDriver driver;
-    LocatorsIdos locators = new LocatorsIdos();
     Browser browser = new Browser(driver);
     MainPageIdos mainPage = new MainPageIdos(driver);
     SearchPageIdos searchPage = new SearchPageIdos(driver);
