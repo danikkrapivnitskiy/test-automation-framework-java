@@ -1,7 +1,7 @@
 package com.regiojet;
 
 
-import main.DriverInitialize;
+import browser.DriverInitialize;
 import org.junit.Test;
 
 

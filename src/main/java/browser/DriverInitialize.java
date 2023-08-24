@@ -1,7 +1,5 @@
-package main;
+package browser;
 
-import browser.Browser;
-import browser.DriverSetUp;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
