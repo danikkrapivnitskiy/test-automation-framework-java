@@ -3,12 +3,11 @@ package cz.idos;
 import main.MethodsMainPage;
 import org.openqa.selenium.WebDriver;
 
-public class MainPageIdos extends MethodsMainPage {
+public class MainPageIdos implements MethodsMainPage {
 
     WebDriver driver;
     LocatorsIdos locators = new LocatorsIdos();
     public MainPageIdos(WebDriver driver){
-        super(driver);
         this.driver=driver;
     }
 
@@ -28,6 +27,7 @@ public class MainPageIdos extends MethodsMainPage {
         Thread.sleep(1000);
 
         driver.findElement(locators.search).submit();
+        Thread.sleep(1000);
     }
 }
 

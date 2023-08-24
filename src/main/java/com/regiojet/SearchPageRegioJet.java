@@ -1,8 +1,8 @@
 package com.regiojet;
 
+import junit.framework.Assert;
 import main.MethodsSearchPage;
 import org.asynchttpclient.util.Assertions;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

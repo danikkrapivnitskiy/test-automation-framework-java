@@ -1,7 +1,7 @@
 package cz.idos;
 
 
-import browser.DriverInitialize;
+import main.DriverInitialize;
 import org.junit.Test;
 
 

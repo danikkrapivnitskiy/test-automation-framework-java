@@ -1,8 +1,7 @@
-package browser;
+package main;
 
 import browser.Browser;
 import browser.DriverSetUp;
-import com.regiojet.LocatorsRegioJet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,7 +14,6 @@ public class DriverInitialize {
     public static void setUpDriver() throws Exception {
         driver = DriverSetUp.setUpDriver("chrome");
     }
-
     @After
     public void quitDriver() throws Exception {
         browser.quitDriver();

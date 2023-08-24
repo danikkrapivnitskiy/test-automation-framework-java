@@ -1,21 +1,15 @@
 package com.regiojet;
 
 
-import browser.Browser;
-import browser.DriverInitialize;
-import browser.DriverSetUp;
-import org.junit.*;
-import org.openqa.selenium.WebDriver;
+import main.DriverInitialize;
+import org.junit.Test;
 
 
 public class RegioJetFrontTest extends DriverInitialize {
     LocatorsRegioJet locators = new LocatorsRegioJet();
     MainPageRegioJet mainPage = new MainPageRegioJet(driver);
     SearchPageRegioJet searchPage = new SearchPageRegioJet(driver);
-
     String URL = "https://regiojet.com";
-
-
 
     @Test
     public void shortestDirection() throws Exception {

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainPageRegioJet extends MethodsMainPage {
+public class MainPageRegioJet implements MethodsMainPage {
 
     WebDriver driver;
     LocatorsRegioJet locators = new LocatorsRegioJet();
@@ -16,7 +16,6 @@ public class MainPageRegioJet extends MethodsMainPage {
     Calendar calendar = Calendar.getInstance();
 
     public MainPageRegioJet(WebDriver driver){
-        super(driver);
         this.driver=driver;
     }
 
