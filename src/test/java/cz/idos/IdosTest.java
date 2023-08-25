@@ -12,18 +12,21 @@ public class IdosTest extends DriverInitialize {
 
     @Test
     public void verifyDateAndTime() throws Exception {
-        browser.setUpPage(URL);
-        mainPage.searchDestination("Praha", "Brno");
+        searchDestination();
 
         searchPage.verifyDateAndTime();
     }
 
     @Test
     public void informationOfTrip() throws InterruptedException {
-        browser.setUpPage(URL);
-        mainPage.searchDestination("Praha", "Brno");
+        searchDestination();
 
         searchPage.informationOfTrip();
+    }
+
+    private void searchDestination() throws InterruptedException {
+        browser.setUpPage(URL);
+        mainPage.searchDestination("Praha", "Brno");
     }
 
 }
