@@ -27,20 +27,10 @@ public class Browser {
 
     public void setUpPage(String link) {
         driver.get(link);
-        try {
-            WebElement regioJetCookiesButton = driver.findElement(locatorsRegioJet.acceptCookies);
-            if (regioJetCookiesButton.isDisplayed()) {
-                regioJetCookiesButton.click();
-            }
-        } catch (NoSuchElementException e) {
-            try {
-                WebElement idosCookiesButton = driver.findElement(locatorsIdos.acceptCookies);
-                if (idosCookiesButton.isDisplayed()) {
-                    idosCookiesButton.click();
-                }
-            } catch (NoSuchElementException ex) {
-
-            }
+        if (!driver.findElements(locatorsRegioJet.acceptCookies).isEmpty()) {
+            driver.findElement(locatorsRegioJet.acceptCookies).click();
+        } else if (!driver.findElements(locatorsIdos.acceptCookies).isEmpty()) {
+            driver.findElement(locatorsIdos.acceptCookies).click();
         }
     }
 
