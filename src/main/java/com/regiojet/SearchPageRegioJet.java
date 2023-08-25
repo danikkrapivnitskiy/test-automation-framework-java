@@ -11,13 +11,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchPageRegioJet extends MethodsSearchPage {
+public class SearchPageRegioJet implements MethodsSearchPage {
 
     WebDriver driver;
     LocatorsRegioJet locators = new LocatorsRegioJet();
 
     public SearchPageRegioJet(WebDriver driver) {
-        super(driver);
         this.driver = driver;
     }
 
