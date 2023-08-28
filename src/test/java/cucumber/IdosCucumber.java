@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 
 import static cucumber.DriverInitializeCucumber.driver;
 
-public class IdosСucumber {
+public class IdosCucumber {
     MainPageIdos mainPage = new MainPageIdos(driver);
     SearchPageIdos searchPage = new SearchPageIdos(driver);
 
