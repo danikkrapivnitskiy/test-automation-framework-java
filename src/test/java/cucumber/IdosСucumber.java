@@ -1,25 +1,39 @@
 package cucumber;
 
-import browser.DriverInitialize;
+import browser.Browser;
 import cz.idos.MainPageIdos;
 import cz.idos.SearchPageIdos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Test;
 
-public class IdosСucumber extends DriverInitialize {
+import static cucumber.DriverInitializeCucumber.driver;
+
+public class IdosСucumber {
     MainPageIdos mainPage = new MainPageIdos(driver);
     SearchPageIdos searchPage = new SearchPageIdos(driver);
 
-    @Given("Open the page {string} and search destination from {string} to {string}")
-    public void searchDestination(String URL, String from, String to) throws InterruptedException {
-        browser.setUpPage(URL);
+    protected Browser browser = new Browser(driver);
+
+    @Given("Open the page {string}")
+    public void setUpPage(String url) {
+        browser.setUpPage(url);
+    }
+
+    @When("Search destination from {string} to {string}")
+    public void searchDestination(String from, String to) throws InterruptedException {
         mainPage.searchDestination(from, to);
     }
 
-    @When("Open page")
+    @And("Verify date and time")
     public void verifyDateAndTime(){
         searchPage.verifyDateAndTime();
+    }
+
+    @Then("Give information about the trip")
+    public void informationOfTrip() {
+        searchPage.informationOfTrip();
     }
 
 
