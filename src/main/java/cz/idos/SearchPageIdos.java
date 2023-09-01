@@ -55,6 +55,7 @@ public class SearchPageIdos{
         LocalTime eightAM = LocalTime.of(8, 0);
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         LocalDate currentDate = LocalDate.now();
+        LocalDate date;
         int year;
         Assert.assertTrue("No trips available for the selected route ", elementsDate.size() > 0);
         for (int i = 0; i < elementsDate.size(); i++) {
@@ -68,8 +69,9 @@ public class SearchPageIdos{
                 year = currentDate.getYear();
 
             }
-
-            LocalDate date = LocalDate.parse(dateAndTime.substring(4, 8) + "." + year, DateTimeFormatter.ofPattern("d.M.yyyy"));
+            if (dateAndTime.charAt(9) == '.') {
+                date = LocalDate.parse(dateAndTime.substring(4, 8) + "." + year, DateTimeFormatter.ofPattern("d.M.yyyy"));
+            } else date = LocalDate.parse(dateAndTime.substring(4, 8) + year, DateTimeFormatter.ofPattern("d.M.yyyy"));
 
             Assert.assertTrue("Date is not tomorrow ", date.isEqual(tomorrow));
         }
