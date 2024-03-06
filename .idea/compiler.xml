@@ -13,6 +13,7 @@
     <bytecodeTargetLevel target="11">
       <module name="Accenture" target="11" />
       <module name="RefioJet" target="11" />
+      <module name="regioJet" target="17" />
       <module name="Roivenue" target="11" />
     </bytecodeTargetLevel>
   </component>

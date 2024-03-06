@@ -1,11 +1,10 @@
 package com.regiojet;
 
-import junit.framework.Assert;
 import main.MethodsSearchPage;
-import org.asynchttpclient.util.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class SearchPageRegioJet implements MethodsSearchPage {
     @Override
     public int takeDirection(By locator) {
         List<WebElement> elements = driver.findElements(locator);
-        Assert.assertTrue("No trips available for the selected route", elements.size() > 0);
+        Assert.assertTrue(elements.size() > 0, "No trips available for the selected route");
         List<LocalTime> localTimes = new ArrayList<>();
         LocalTime minTime = null;
 
@@ -45,7 +44,7 @@ public class SearchPageRegioJet implements MethodsSearchPage {
 
         int minIndex = localTimes.indexOf(minTime);
 
-        Assertions.assertNotNull(minIndex, "No trip found with the shortest duration");
+        Assert.assertNotNull(minIndex, "No trip found with the shortest duration");
 
         System.out.println("Departure and arrival time: " +
                 driver.findElement(By.xpath(locators.timeDepartureAndArrival.toString().substring(9) + "[" + (minIndex + 1) + "]")).getText());
@@ -57,15 +56,15 @@ public class SearchPageRegioJet implements MethodsSearchPage {
 
     public void selectItem(int index) {
         List<WebElement> elements = driver.findElements(locators.selectItem);
-        Assert.assertFalse("No trips available for the selected route", elements.isEmpty());
-        Assert.assertTrue("Invalid index: " + index, index >= 0 && index < elements.size());
+        Assert.assertFalse(elements.isEmpty(), "No trips available for the selected route");
+        Assert.assertTrue(index >= 0 && index < elements.size(), "Invalid index: " + index);
 
         elements.get(index).click();
     }
 
     public int price() {
         List<WebElement> elements = driver.findElements(locators.selectItem);
-        Assert.assertTrue("No trips available for the selected route", elements.size() > 0);
+        Assert.assertTrue(elements.size() > 0, "No trips available for the selected route");
         List<Integer> priceList = new ArrayList<>();
         Integer lowestPrice = Integer.MAX_VALUE;
 
@@ -86,7 +85,7 @@ public class SearchPageRegioJet implements MethodsSearchPage {
             }
         }
 
-        Assertions.assertNotNull(lowestPrice, "No trip found");
+        Assert.assertNotNull(lowestPrice, "No trip found");
 
         int indexPrice = priceList.indexOf(lowestPrice);
 

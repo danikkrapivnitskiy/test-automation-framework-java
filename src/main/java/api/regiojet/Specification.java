@@ -1,4 +1,4 @@
-package api;
+package api.regiojet;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;

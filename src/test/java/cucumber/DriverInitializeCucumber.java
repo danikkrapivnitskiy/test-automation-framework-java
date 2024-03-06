@@ -2,25 +2,25 @@ package cucumber;
 
 import browser.Browser;
 import browser.DriverSetUp;
-import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 
 public class DriverInitializeCucumber {
     protected static WebDriver driver;
     protected Browser browser = new Browser(driver);
-    @BeforeAll
+    @BeforeClass
     public static void setUpDriver() throws Exception {
         driver = DriverSetUp.setUpDriver("chrome");
     }
-    @After
+    @AfterMethod
     public void quitDriver() throws Exception {
         browser.quitDriver();
         setUpDriver();
     }
 
-    @AfterAll
+    @AfterClass
     public static void closeDriver() {
         driver.close();
     }

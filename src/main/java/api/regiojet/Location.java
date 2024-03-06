@@ -1,4 +1,4 @@
-package api;
+package api.regiojet;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

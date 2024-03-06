@@ -1,4 +1,4 @@
-package api;
+package api.regiojet;
 
 import java.util.ArrayList;
 import java.util.Date;

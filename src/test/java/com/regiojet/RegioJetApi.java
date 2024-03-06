@@ -1,7 +1,11 @@
-package api;
+package com.regiojet;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import api.regiojet.Location;
+import api.regiojet.RoutesResponse;
+import api.regiojet.Specification;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.List;
@@ -45,7 +49,7 @@ public class RegioJetApi {
                 .statusCode(200)
                 .extract().body().jsonPath().getList("routes", RoutesResponse.class);
 
-        Comparator<RoutesResponse> comparator = null;
+        Comparator<RoutesResponse> comparator;
         switch(fieldName) {
             case "departureTime":
                 comparator = Comparator.comparing(RoutesResponse::getDepartureTime);
@@ -61,7 +65,7 @@ public class RegioJetApi {
         }
 
         RoutesResponse minValue = routesResponsesList.stream().min(comparator).orElse(null);
-        Assertions.assertNotNull(minValue);
+        Assert.assertNotNull(minValue);
 
         System.out.println(description + "The route is - " + minValue.getDepartureTime()
                 + " - with arrival " + minValue.getArrivalTime()
