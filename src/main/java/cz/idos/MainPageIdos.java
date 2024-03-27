@@ -1,6 +1,6 @@
 package cz.idos;
 
-import main.MethodsMainPage;
+import interfaces.MethodsMainPage;
 import org.openqa.selenium.WebDriver;
 
 public class MainPageIdos implements MethodsMainPage {

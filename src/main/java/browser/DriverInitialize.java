@@ -9,7 +9,7 @@ public class DriverInitialize {
     protected static WebDriver driver;
     protected Browser browser = new Browser(driver);
     @BeforeClass
-    public static void setUpDriver() throws Exception {
+    public static void setUpDriver() {
         driver = DriverSetUp.setUpDriver("chrome");
     }
     @After

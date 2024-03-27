@@ -1,6 +1,6 @@
 package com.regiojet;
 
-import main.MethodsMainPage;
+import interfaces.MethodsMainPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
