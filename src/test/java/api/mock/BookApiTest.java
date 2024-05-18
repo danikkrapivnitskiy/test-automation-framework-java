@@ -1,4 +1,4 @@
-package api;
+package api.mock;
 
 import api.book.MockServer;
 import api.book.RequestProcess;

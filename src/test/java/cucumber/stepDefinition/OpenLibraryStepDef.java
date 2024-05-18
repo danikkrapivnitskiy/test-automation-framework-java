@@ -62,7 +62,7 @@ public class OpenLibraryStepDef {
 
     @And("Get author from API for book")
     public void get_author_from_api() {
-        author = searchApi.getAuthorByBookAndYear(searchBook, publishedYear);
+        author = searchApi.getAuthorByBookAndYear(searchBook, publishedYear).toString();
     }
 
     @Then("Author from API matches author on book page")
