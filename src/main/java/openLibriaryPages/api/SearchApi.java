@@ -12,13 +12,13 @@ import static io.restassured.RestAssured.given;
 @Slf4j(topic = "|SearchApi|")
 public class SearchApi {
     private static final String baseUrl = "https://openlibrary.org/search.json";
-    BooksResponse booksResponse;
+    BooksResponse booksResponse = new BooksResponse();
 
     @SneakyThrows
     public Object getAuthorByBookAndYear(String title, int publishYear) {
         Map<String, Object> bookAndYear = new HashMap<>();
-        bookAndYear.put(getAnnotationNameOfField(booksResponse.getTitle()), title);
-        bookAndYear.put(getAnnotationNameOfField(booksResponse.getPublish_year().toString()), publishYear);
+        bookAndYear.put("title", title);
+        bookAndYear.put("publish_year", publishYear);
         List<BooksResponse> response = getResponse(bookAndYear);
         return getObjectFromResponse(response, response.get(0).getAuthor_name().get(2));
     }
