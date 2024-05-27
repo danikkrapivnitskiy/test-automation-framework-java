@@ -10,12 +10,14 @@ import regioJet.gui.SearchPageRegioJet;
 
 @ExtendWith(FailedTestScreenshotExtension.class)
 public class RegioJetFrontTest extends DriverInitialize {
-    MainPageRegioJet mainPage = new MainPageRegioJet(driver);
-    SearchPageRegioJet searchPage = new SearchPageRegioJet(driver);
+    MainPageRegioJet mainPage;
+    SearchPageRegioJet searchPage;
     String URL = "https://regiojet.com";
 
     @BeforeEach
     public void searchDestination() {
+        mainPage = new MainPageRegioJet(driver);
+        searchPage = new SearchPageRegioJet(driver);
         mainPage.setupPage(URL);
         mainPage.searchDestination("Ostrava", "Brno");
     }

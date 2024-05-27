@@ -1,6 +1,6 @@
 package cucumber.stepDefinition;
 
-import browser.DriverSetUp;
+import browser.WebDriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -27,7 +27,7 @@ public class OpenLibraryStepDef {
 
     @Before
     public void setup() {
-        driver = DriverSetUp.setUpDriver("chrome");
+        driver = WebDriverFactory.setUpDriver("chrome");
         openLibraryCommon = new OpenLibraryCommon(driver);
         searchPage = new SearchPage(driver);
         bookPage = new BookPage(driver);

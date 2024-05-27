@@ -8,11 +8,11 @@ public class DriverInitialize {
     public static WebDriver driver;
     @BeforeEach
     public void setUpDriver() {
-        driver = DriverSetUp.setUpDriver("chrome");
+        driver = WebDriverFactory.setUpDriver(Browser.CHROME.getName());
     }
 
     @AfterEach
     public void closeDriver() {
-        DriverSetUp.quitDriver();
+        WebDriverFactory.quitDriver();
     }
 }

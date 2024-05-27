@@ -1,7 +1,7 @@
 package openLibriaryPages.gui;
 
 import browser.DriverMethods;
-import browser.DriverSetUp;
+import browser.WebDriverFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -43,6 +43,6 @@ public class OpenLibraryCommon {
     }
 
     public void closeBrowser() {
-        DriverSetUp.quitDriver();
+        WebDriverFactory.quitDriver();
     }
 }

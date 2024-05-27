@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 @Slf4j(topic = "|Driver common method|")
-public class DriverMethods extends DriverSetUp{
+public class DriverMethods extends WebDriverFactory{
     private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     public void setupPage(String link, By cookies) {
         driver.get(link);

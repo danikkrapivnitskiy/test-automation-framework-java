@@ -7,25 +7,25 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
-@Slf4j(topic = "|DriverSetUp|")
-public class DriverSetUp {
+@Slf4j(topic = "|WebDriverFactory|")
+public class WebDriverFactory {
 
     static WebDriver driver;
+    private static final String CHROME = "chrome";
+    private static final String FIREFOX = "firefox";
 
     protected static WebDriver getDriver(String browser) throws Exception {
         switch (browser) {
-            case "chrome" -> {
+            case CHROME -> {
                 driver = new ChromeDriver();
-                driver.manage().window().maximize();
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
             }
-            case "firefox" -> {
+            case FIREFOX -> {
                 driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             }
             default -> throw new Exception("Not correct browser");
         }
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         return driver;
     }
 
