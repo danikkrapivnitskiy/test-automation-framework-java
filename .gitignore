@@ -5,3 +5,4 @@ target/
 chrome-win64/
 chromedriver-win64/
 screenshots/
+.backlog
