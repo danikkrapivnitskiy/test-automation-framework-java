@@ -1,4 +1,4 @@
-package db;
+package mockServerBook.db;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static api.book.DBConfiguration.*;
+import static mockServerBook.DBConfiguration.*;
 
 @Slf4j(topic = "|DB connection|")
 public class DbConnection {
@@ -21,7 +21,7 @@ public class DbConnection {
     /**
      * Connect to DB
      */
-    protected void connect() {
+    public void connect() {
         try {
             connection = DriverManager.getConnection(connectionString);
         } catch (SQLException e) {

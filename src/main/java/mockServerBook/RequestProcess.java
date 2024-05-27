@@ -1,8 +1,8 @@
-package api.book;
+package mockServerBook;
 
 import io.restassured.response.Response;
 
-import static api.book.DBConfiguration.ID;
+import static mockServerBook.DBConfiguration.ID;
 import static io.restassured.RestAssured.given;
 
 public class RequestProcess {

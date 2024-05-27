@@ -11,33 +11,34 @@ import java.time.Duration;
 public class DriverSetUp {
 
     static WebDriver driver;
-    @SneakyThrows
-    public static WebDriver setUpDriver(String browser) {
-        log.info("Setup browser " + browser);
-        WebDriver driver = getDriver(browser);
-        switch (browser){
-            case "chrome": {
+
+    protected static WebDriver getDriver(String browser) throws Exception {
+        switch (browser) {
+            case "chrome" -> {
+                driver = new ChromeDriver();
                 driver.manage().window().maximize();
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-                break;
             }
-            case "firefox": {
+            case "firefox" -> {
+                driver = new FirefoxDriver();
                 driver.manage().window().maximize();
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-                break;
             }
-            default:
-                throw new IllegalStateException("Unexpected value: " + browser);
+            default -> throw new Exception("Not correct browser");
         }
         return driver;
     }
 
-    public static WebDriver getDriver(String browser) throws Exception {
-        if (browser.equals("chrome")) {
-            driver = new ChromeDriver();
-        } else if (browser.equals("firefox")) {
-            driver = new FirefoxDriver();
-        } else throw new Exception("Not correct browser");
-        return driver;
+    @SneakyThrows
+    public static WebDriver setUpDriver(String browser) {
+        log.info("Setup driver " + browser);
+        return getDriver(browser);
+    }
+
+    public static void quitDriver() {
+        if (driver != null) {
+            log.info("Driver closed");
+            driver.quit();
+        }
     }
 }

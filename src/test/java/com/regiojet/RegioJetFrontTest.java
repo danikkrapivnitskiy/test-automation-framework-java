@@ -1,40 +1,41 @@
 package com.regiojet;
 
-
 import browser.DriverInitialize;
-import org.junit.Test;
+import extension.FailedTestScreenshotExtension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import regioJet.gui.MainPageRegioJet;
+import regioJet.gui.SearchPageRegioJet;
 
-
+@ExtendWith(FailedTestScreenshotExtension.class)
 public class RegioJetFrontTest extends DriverInitialize {
-    LocatorsRegioJet locators = new LocatorsRegioJet();
     MainPageRegioJet mainPage = new MainPageRegioJet(driver);
     SearchPageRegioJet searchPage = new SearchPageRegioJet(driver);
     String URL = "https://regiojet.com";
 
-    @Test
-    public void shortestDirection() throws Exception {
-        searchDestination();
-
-        searchPage.selectItem(searchPage.takeDirection(locators.timeDuration));
-    }
-
-    @Test
-    public void earliestDirection() throws Exception {
-        searchDestination();
-
-        searchPage.selectItem(searchPage.takeDirection(locators.timeDepartureAndArrival));
-    }
-
-    @Test
-    public void lowestPrice() throws Exception {
-        searchDestination();
-
-        searchPage.selectItem(searchPage.price());
-    }
-
-    private void searchDestination() throws InterruptedException {
-        browser.setUpPage(URL);
+    @BeforeEach
+    public void searchDestination() {
+        mainPage.setupPage(URL);
         mainPage.searchDestination("Ostrava", "Brno");
+    }
+
+    @Test
+    public void shortestDirection() {
+        int getItemDirection = searchPage.takeDirection(searchPage.timeDuration);
+        searchPage.selectDirection(getItemDirection);
+    }
+
+    @Test
+    public void earliestDirection() {
+        int getItemDirection = searchPage.takeDirection(searchPage.timeDepartureAndArrival);
+        searchPage.selectDirection(getItemDirection);
+    }
+
+    @Test
+    public void lowestPrice() {
+        int getItemDirection = searchPage.getMinimumPrice();
+        searchPage.selectDirection(getItemDirection);
     }
 
 }

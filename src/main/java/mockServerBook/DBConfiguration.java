@@ -1,4 +1,4 @@
-package api.book;
+package mockServerBook;
 
 import lombok.Getter;
 

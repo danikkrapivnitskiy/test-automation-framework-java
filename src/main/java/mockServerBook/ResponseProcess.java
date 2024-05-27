@@ -1,12 +1,12 @@
-package api.book;
+package mockServerBook;
 
-import db.DbConnection;
+import mockServerBook.db.DbConnection;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 
-import static api.book.DBConfiguration.DB;
-import static api.book.DBConfiguration.SELECT;
+import static mockServerBook.DBConfiguration.DB;
+import static mockServerBook.DBConfiguration.SELECT;
 
 @Slf4j(topic = "|Response processing|")
 public class ResponseProcess {

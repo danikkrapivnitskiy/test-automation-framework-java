@@ -1,32 +1,32 @@
 package cz.idos;
 
-
 import browser.DriverInitialize;
-import org.junit.Test;
+import extension.FailedTestScreenshotExtension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-
+@ExtendWith(FailedTestScreenshotExtension.class)
 public class IdosTest extends DriverInitialize {
-    MainPageIdos mainPage = new MainPageIdos(driver);
-    SearchPageIdos searchPage = new SearchPageIdos(driver);
-    String URL = "https://www.idos.cz/";
+    private MainPageIdos mainPage;
+    private SearchPageIdos searchPage;
+    private final String URL = "https://www.idos.cz/";
 
-    @Test
-    public void verifyDateAndTime() throws Exception {
-        searchDestination();
-
-        searchPage.verifyDateAndTime();
-    }
-
-    @Test
-    public void informationOfTrip() throws InterruptedException {
-        searchDestination();
-
-        searchPage.informationOfTrip();
-    }
-
-    private void searchDestination() throws InterruptedException {
-        browser.setUpPage(URL);
+    @BeforeEach
+    public void searchDestination() {
+        mainPage = new MainPageIdos(driver);
+        searchPage = new SearchPageIdos(driver);
+        mainPage.setupPage(URL);
         mainPage.searchDestination("Praha", "Brno");
     }
 
+    @Test
+    public void verifyDateAndTimeForAllDirectionAfterSpecificTime() {
+        searchPage.verifyDateAndTimeDeparture(8, 0);
+    }
+
+    @Test
+    public void logStopsTimePriceAndDurationForEachDirection(){
+        searchPage.getInformationOfTrip(true);
+    }
 }

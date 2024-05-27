@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.ArrayList;
 
 @Data
-public class Pojo {
+public class BooksResponse {
     public ArrayList<String> author_alternative_name;
     public ArrayList<String> author_key;
     public ArrayList<String> author_name;

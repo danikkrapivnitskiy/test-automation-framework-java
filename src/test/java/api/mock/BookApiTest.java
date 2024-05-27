@@ -1,8 +1,8 @@
 package api.mock;
 
-import api.book.MockServer;
-import api.book.RequestProcess;
-import api.book.ResponseProcess;
+import mockServerBook.MockServer;
+import mockServerBook.RequestProcess;
+import mockServerBook.ResponseProcess;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static api.book.DBConfiguration.*;
+import static mockServerBook.DBConfiguration.*;
 
 class BookApiTest {
 

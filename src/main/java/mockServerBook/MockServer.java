@@ -1,11 +1,10 @@
-package api.book;
+package mockServerBook;
 
-import db.DbConnection;
+import mockServerBook.db.DbConnection;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.mockserver.integration.ClientAndServer;
 
-import static api.book.DBConfiguration.*;
 import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
@@ -36,16 +35,16 @@ public class MockServer {
      */
     @SneakyThrows
     public void createMockServerForSelect() {
-        getSpecificMockServer(BOOK_ID, dbConnection.returnDbInJson(DB.getQuery(), BOOK_ID, SELECT.getQuery()));
-        getAllMockServer(dbConnection.returnDbInJson(DB.getQuery(), null, SELECT.getQuery()));
+        getSpecificMockServer(BOOK_ID, dbConnection.returnDbInJson(DBConfiguration.DB.getQuery(), BOOK_ID, DBConfiguration.SELECT.getQuery()));
+        getAllMockServer(dbConnection.returnDbInJson(DBConfiguration.DB.getQuery(), null, DBConfiguration.SELECT.getQuery()));
     }
 
     public void createMockServerPostMethod() {
-        postMockServer(CREATE_BODY.getQuery(), dbConnection.addObjectToSql().returnDbInJson(DB.getQuery(), "5", SELECT.getQuery()));
+        postMockServer(DBConfiguration.CREATE_BODY.getQuery(), dbConnection.addObjectToSql().returnDbInJson(DBConfiguration.DB.getQuery(), "5", DBConfiguration.SELECT.getQuery()));
     }
 
     public void createMockServerPatchMedhod() {
-        updateMockServer("id", "5", UPDATE_BODY.getQuery(), dbConnection.updateObjectToSql().returnDbInJson(DB.getQuery(), "5", SELECT.getQuery()));
+        updateMockServer("id", "5", DBConfiguration.UPDATE_BODY.getQuery(), dbConnection.updateObjectToSql().returnDbInJson(DBConfiguration.DB.getQuery(), "5", DBConfiguration.SELECT.getQuery()));
     }
 
     public void createMockServerDeleteMethod() {
@@ -57,7 +56,7 @@ public class MockServer {
                 request()
                         .withMethod("GET")
                         .withPath(BOOK_URL)
-                        .withQueryStringParameter(ID.getQuery(), id)
+                        .withQueryStringParameter(DBConfiguration.ID.getQuery(), id)
         ).respond(
                 response()
                         .withStatusCode(200)

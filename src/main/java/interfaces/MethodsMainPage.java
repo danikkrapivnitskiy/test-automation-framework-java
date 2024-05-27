@@ -1,6 +1,10 @@
 package interfaces;
 
-public interface MethodsMainPage {
+import lombok.SneakyThrows;
 
-    void searchDestination(String from, String to) throws InterruptedException;
+public interface MethodsMainPage {
+    @SneakyThrows
+    void searchDestination(String from, String to);
+
+    void setupPage(String link);
 }

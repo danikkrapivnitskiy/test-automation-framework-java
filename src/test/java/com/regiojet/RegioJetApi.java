@@ -1,9 +1,9 @@
 package com.regiojet;
 
 
-import api.regiojet.Location;
-import api.regiojet.RoutesResponse;
-import api.regiojet.Specification;
+import regioJet.api.Location;
+import regioJet.api.RoutesResponse;
+import regioJet.api.Specification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
