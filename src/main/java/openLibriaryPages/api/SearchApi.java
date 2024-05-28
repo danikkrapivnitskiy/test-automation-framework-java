@@ -1,5 +1,6 @@
 package openLibriaryPages.api;
 
+import api.Specification;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +14,6 @@ import static io.restassured.RestAssured.given;
 @Slf4j(topic = "|SearchApi|")
 public class SearchApi {
     private static final String baseUrl = "https://openlibrary.org/search.json";
-    BooksResponse booksResponse = new BooksResponse();
 
     @SneakyThrows
     public Object getAuthorByBookAndYear(String title, int publishYear) {
@@ -26,7 +26,7 @@ public class SearchApi {
 
     private List<BooksResponse> getBooksResponse(Map<String, Object> params) {
         log.info("Send API request by params: " + params.values());
-        Specification.requestSpec(baseUrl);
+        Specification.installSpecification(Specification.requestSpec(baseUrl), Specification.responseSpecOK200());
         return given()
                 .params(params)
                 .get(baseUrl)

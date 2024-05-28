@@ -1,5 +1,6 @@
 package regioJet.api;
 
+import api.Specification;
 import lombok.Data;
 
 import java.time.DayOfWeek;
