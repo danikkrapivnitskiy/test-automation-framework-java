@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,11 +20,11 @@ public class SearchApi {
         Map<String, Object> bookAndYear = new HashMap<>();
         bookAndYear.put("title", title);
         bookAndYear.put("publish_year", publishYear);
-        List<BooksResponse> response = getResponse(bookAndYear);
-        return getObjectFromResponse(response, response.get(0).getAuthor_name().get(2));
+        List<BooksResponse> response = getBooksResponse(bookAndYear);
+        return getAuthorByParams(response, bookAndYear);
     }
 
-    private List<BooksResponse> getResponse(Map<String, Object> params) {
+    private List<BooksResponse> getBooksResponse(Map<String, Object> params) {
         log.info("Send API request by params: " + params.values());
         Specification.requestSpec(baseUrl);
         return given()
@@ -34,18 +35,20 @@ public class SearchApi {
                 .extract().body().jsonPath().getList("docs", BooksResponse.class);
     }
 
-    private Object getObjectFromResponse(List<BooksResponse> response, Object getObjectFromResponse) {
+    private Object getAuthorByParams(List<BooksResponse> response, Map<String, Object> params) {
         log.info("Check if the response is correct");
-        if (!response.isEmpty()) {
-            return getObjectFromResponse;
-        } else {
-            System.out.println("Failed to fetch search results. Response code: ");
-        }
-        return null;
-    }
 
-    @SneakyThrows
-    private String getAnnotationNameOfField(String filed) {
-        return BooksResponse.class.getField(filed).getAnnotation(CompareFlag.class).value();
+        Optional<String> author = response.stream()
+                .filter(item -> item.getTitle().equals(params.get("title")) &&
+                        item.getPublish_year().contains(params.get("publish_year")))
+                .findFirst()
+                .map(item -> item.getAuthor_name().get(0));
+
+        if (author.isPresent()) {
+            return author.get();
+        } else {
+            log.error("Failed to fetch search results.");
+            return null;
+        }
     }
 }
