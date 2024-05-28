@@ -1,6 +1,4 @@
 1. Add Allure
 2. Add Jenkins/GitLab CI
-3. Add Listener for TestNG
-4. Add Faker for generating data
-5. Update API methods for Open Library project
-6. Add integration with DB (by entity)
+3. Add Faker for generating data
+4. Add integration with DB (by entity)

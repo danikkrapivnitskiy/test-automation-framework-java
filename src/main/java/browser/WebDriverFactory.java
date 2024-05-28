@@ -1,5 +1,6 @@
 package browser;
 
+import listener.ListenerTestNG;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ public class WebDriverFactory {
         switch (browser) {
             case CHROME -> {
                 driver = new ChromeDriver();
+                ListenerTestNG.driverThreadLocal.set(driver);
             }
             case FIREFOX -> {
                 driver = new FirefoxDriver();

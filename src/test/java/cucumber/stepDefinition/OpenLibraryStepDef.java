@@ -1,7 +1,7 @@
 package cucumber.stepDefinition;
 
 import browser.WebDriverFactory;
-import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,7 +17,7 @@ import org.testng.Assert;
 public class OpenLibraryStepDef {
 
     protected static WebDriver driver;
-    private OpenLibraryCommon openLibraryCommon;
+    private static OpenLibraryCommon openLibraryCommon;
     private SearchPage searchPage;
     private BookPage bookPage;
     private SearchBookApi searchBookApi;
@@ -33,8 +33,8 @@ public class OpenLibraryStepDef {
         bookPage = new BookPage(driver);
         searchBookApi = new SearchBookApi();
     }
-    @After
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         openLibraryCommon.closeBrowser();
     }
 
