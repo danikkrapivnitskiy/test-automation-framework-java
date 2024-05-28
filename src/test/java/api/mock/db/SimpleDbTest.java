@@ -1,4 +1,4 @@
-package db;
+package api.mock.db;
 import mockServerBook.db.DbConnection;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;

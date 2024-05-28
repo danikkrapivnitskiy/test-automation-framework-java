@@ -7,7 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import openLibriaryPages.api.SearchApi;
+import openLibriaryPages.api.SearchBookApi;
 import openLibriaryPages.gui.BookPage;
 import openLibriaryPages.gui.OpenLibraryCommon;
 import openLibriaryPages.gui.SearchPage;
@@ -20,7 +20,7 @@ public class OpenLibraryStepDef {
     private OpenLibraryCommon openLibraryCommon;
     private SearchPage searchPage;
     private BookPage bookPage;
-    private SearchApi searchApi;
+    private SearchBookApi searchBookApi;
     private String author;
     private String searchBook;
     private int publishedYear;
@@ -31,7 +31,7 @@ public class OpenLibraryStepDef {
         openLibraryCommon = new OpenLibraryCommon(driver);
         searchPage = new SearchPage(driver);
         bookPage = new BookPage(driver);
-        searchApi = new SearchApi();
+        searchBookApi = new SearchBookApi();
     }
     @After
     public void tearDown() {
@@ -62,7 +62,7 @@ public class OpenLibraryStepDef {
 
     @And("Get author from API for book")
     public void get_author_from_api() {
-        author = searchApi.getAuthorByBookAndYear(searchBook, publishedYear).toString();
+        author = searchBookApi.getAuthorByBookAndYear(searchBook, publishedYear).toString();
     }
 
     @Then("Author from API matches author on book page")

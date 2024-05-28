@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.restassured.RestAssured.given;
-
-@Slf4j(topic = "|SearchApi|")
-public class SearchApi {
+@Slf4j(topic = "|SearchBookApi|")
+public class SearchBookApi {
     private static final String baseUrl = "https://openlibrary.org/search.json";
 
     @SneakyThrows
@@ -27,9 +25,7 @@ public class SearchApi {
     private List<BooksResponse> getBooksResponse(Map<String, Object> params) {
         log.info("Send API request by params: " + params.values());
         Specification.installSpecification(Specification.requestSpec(baseUrl), Specification.responseSpecOK200());
-        return given()
-                .params(params)
-                .get(baseUrl)
+        return Specification.sendGetRequest(baseUrl, params)
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getList("docs", BooksResponse.class);
@@ -37,7 +33,6 @@ public class SearchApi {
 
     private Object getAuthorByParams(List<BooksResponse> response, Map<String, Object> params) {
         log.info("Check if the response is correct");
-
         Optional<String> author = response.stream()
                 .filter(item -> item.getTitle().equals(params.get("title")) &&
                         item.getPublish_year().contains(params.get("publish_year")))

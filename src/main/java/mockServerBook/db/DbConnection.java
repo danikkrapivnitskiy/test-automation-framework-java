@@ -15,7 +15,7 @@ public class DbConnection {
     protected String connectionString;
     protected Connection connection;
     public DbConnection() {
-        connectionString = "jdbc:sqlite:src/main/java/db/" + SQL.getQuery();
+        connectionString = "jdbc:sqlite:src/main/java/mockServerBook/db/" + SQL.getQuery();
     }
 
     /**
