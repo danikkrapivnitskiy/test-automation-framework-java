@@ -2,17 +2,16 @@ package com.regiojet;
 
 
 import api.Specification;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import regioJet.api.Location;
 import regioJet.api.RoutesResponse;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import java.util.Comparator;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class RegioJetApi {
+public class RegioJetApiTest {
 
     private String URL = "https://brn-ybus-pubapi.sa.cz";
     private final Integer fromId = getLocationId("Ostrava");
@@ -41,10 +40,10 @@ public class RegioJetApi {
     }
 
     public void minResponse(String fieldName, String description) {
-        Specification.requestSpec(URL);
+        Specification.installSpecification(Specification.requestSpec(URL), Specification.responseSpecOK200());
         List<RoutesResponse> routesResponsesList = given()
                 .when()
-                .get(URL + SEARCH_PATH)
+                .get(SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .extract().body().jsonPath().getList("routes", RoutesResponse.class);
@@ -65,7 +64,7 @@ public class RegioJetApi {
         }
 
         RoutesResponse minValue = routesResponsesList.stream().min(comparator).orElse(null);
-        Assert.assertNotNull(minValue);
+        Assertions.assertNotNull(minValue);
 
         System.out.println(description + "The route is - " + minValue.getDepartureTime()
                 + " - with arrival " + minValue.getArrivalTime()
