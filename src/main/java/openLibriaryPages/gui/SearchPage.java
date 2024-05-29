@@ -19,7 +19,7 @@ public class SearchPage {
     }
 
     public void selectBookBySpecificYear(Integer year) {
-        log.info("Select book by a specific year");
+        log.info("Select book by a specific year " + year);
         List<WebElement> elementList = driver.findElements(publishYear);
         int foundIndex = IntStream.range(0, elementList.size())
                 .filter(i -> elementList.get(i).getText().contains(year.toString()))

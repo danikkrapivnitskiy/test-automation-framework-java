@@ -66,7 +66,7 @@ public class OpenLibraryStepDef {
     }
 
     @Then("Author from API matches author on book page")
-    public void author_api_correspondes_to_web() {
+    public void author_api_corresponds_to_web() {
         Assert.assertEquals(author, bookPage.getAuthorOfBook(), "Authors are not equals");
     }
 

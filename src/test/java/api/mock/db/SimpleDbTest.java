@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SimpleDbTest extends DbConnection {
+public class SimpleDbTest {
     DbConnection dbConnection = new DbConnection();
     @BeforeClass
     public void startConnection() {

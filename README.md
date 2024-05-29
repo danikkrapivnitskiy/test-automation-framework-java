@@ -32,7 +32,7 @@
 
 ### Getting Started:
 #### 1. Prerequisites:
-- Java 17+: Ensure you have Java 17 or later installed.
+- Java 17+: Ensure you have Java 17 or later installed. Update java version in properties pom.xml if needed
     ```bash
     java --version
     ```

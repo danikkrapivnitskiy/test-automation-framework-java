@@ -7,12 +7,13 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
-
+@Slf4j(topic = "|Specification|")
 public class Specification {
     public static RequestSpecification requestSpec(String url){
         return new RequestSpecBuilder()
@@ -49,6 +50,8 @@ public class Specification {
     }
 
     private static Response sendRequest(Method method, String path, Map<String, Object> queryParams, Map<String, Object> body) {
+        log.info(String.format("Send %s request to %s with params %s and body %s",
+                method.toString(), path, queryParams.values(), body.toString()));
         return given()
                 .queryParams(queryParams)
                 .body(body)

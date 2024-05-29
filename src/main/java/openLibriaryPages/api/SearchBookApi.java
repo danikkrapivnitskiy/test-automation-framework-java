@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static io.restassured.RestAssured.given;
+
 @Slf4j(topic = "|SearchBookApi|")
 public class SearchBookApi {
     private static final String baseUrl = "https://openlibrary.org/search.json";
@@ -24,7 +26,6 @@ public class SearchBookApi {
 
     private List<BooksResponse> getBooksResponse(Map<String, Object> params) {
         log.info("Send API request by params: " + params.values());
-        Specification.installSpecification(Specification.requestSpec(baseUrl), Specification.responseSpecOK200());
         return Specification.sendGetRequest(baseUrl, params)
                 .then()
                 .statusCode(200)
