@@ -9,11 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.restassured.RestAssured.given;
-
 @Slf4j(topic = "|SearchBookApi|")
 public class SearchBookApi {
-    private static final String baseUrl = "https://openlibrary.org/search.json";
+    private static final String BASE_URL = "https://openlibrary.org/search.json";
 
     @SneakyThrows
     public Object getAuthorByBookAndYear(String title, int publishYear) {
@@ -25,10 +23,9 @@ public class SearchBookApi {
     }
 
     private List<BooksResponse> getBooksResponse(Map<String, Object> params) {
-        log.info("Send API request by params: " + params.values());
-        return Specification.sendGetRequest(baseUrl, params)
+        Specification.installSpecification(Specification.requestSpec(BASE_URL), Specification.responseSpecOK200());
+        return Specification.sendGetRequest(BASE_URL, params)
                 .then()
-                .statusCode(200)
                 .extract().body().jsonPath().getList("docs", BooksResponse.class);
     }
 

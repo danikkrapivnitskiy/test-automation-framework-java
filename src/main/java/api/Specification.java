@@ -9,7 +9,6 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -51,27 +50,34 @@ public class Specification {
 
     private static Response sendRequest(Method method, String path, Map<String, Object> queryParams, Map<String, Object> body) {
         log.info(String.format("Send %s request to %s with params %s and body %s",
-                method.toString(), path, queryParams.values(), body.toString()));
-        return given()
-                .queryParams(queryParams)
-                .body(body)
-                .request(method, path);
+                method.toString(), path, queryParams.values(), body));
+        RequestSpecification requestSpec = given();
+
+        if (!queryParams.isEmpty()) {
+            requestSpec.queryParams(queryParams);
+        }
+
+        if (body != null) {
+            requestSpec.body(body);
+        }
+
+        return requestSpec.request(method, path);
     }
 
     public static Response sendGetRequest(String path, Map<String, Object> queryParams) {
-        return sendRequest(Method.GET, path, queryParams, new HashMap<>());
+        return sendRequest(Method.GET, path, queryParams, null);
     }
 
     public static Response sendPostRequest(String path, Map<String, Object> body) {
-        return sendRequest(Method.POST, path, new HashMap<>(), body);
+        return sendRequest(Method.POST, path, null, body);
     }
 
     public static Response sendPutRequest(String path, Map<String, Object> body) {
-        return sendRequest(Method.PUT, path, new HashMap<>(), body);
+        return sendRequest(Method.PUT, path, null, body);
     }
 
     public static Response sendDeleteRequest(String path) {
-        return sendRequest(Method.DELETE, path, new HashMap<>(), new HashMap<>());
+        return sendRequest(Method.DELETE, path, null, null);
     }
 
 }
