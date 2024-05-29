@@ -4,15 +4,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
-public class DriverInitialize {
+public class DriverInitialize extends WebDriverFactory {
     public static WebDriver driver;
     @BeforeEach
     public void setUpDriver() {
-        driver = WebDriverFactory.setUpDriver(Browser.CHROME.getName());
+        driver = setUpDriver(Browser.CHROME.getName());
     }
 
     @AfterEach
     public void closeDriver() {
-        WebDriverFactory.quitDriver();
+        quitDriver();
     }
 }

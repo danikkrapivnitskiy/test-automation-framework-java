@@ -1,6 +1,6 @@
 package regioJet.gui;
 
-import browser.DriverMethods;
+import browser.BaseDriverMethods;
 import interfaces.MethodsMainPage;
 import lombok.SneakyThrows;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainPageRegioJet implements MethodsMainPage {
+public class MainPageRegioJet extends BaseDriverMethods implements MethodsMainPage {
 
     private final By from = By.xpath("//input[@aria-label='From']");
     private final By to = By.xpath("//input[@aria-label='To']");
@@ -27,7 +27,6 @@ public class MainPageRegioJet implements MethodsMainPage {
             "hover:shadow-modal cursor-pointer bg-primary-blue text-white border-none hover:bg-secondary-bluedark " +
             "focus-visible:bg-secondary-bluedark h-12 sm:w-full']");
     private final WebDriver driver;
-    private final DriverMethods driverMethods = new DriverMethods();
     private final Calendar calendar = Calendar.getInstance();
 
     public MainPageRegioJet(WebDriver driver){
@@ -40,33 +39,33 @@ public class MainPageRegioJet implements MethodsMainPage {
         setDepartureDestination(from);
         setArrivalDestination(to);
         chooseDate();
-        driverMethods.submitElement(search);
+        submitElement(search);
     }
 
     private void setDepartureDestination(String from) {
-        driverMethods.sendKeys(this.from, from);
-        driverMethods.sendKeys(this.from, Keys.ENTER);
+        sendKeys(this.from, from);
+        sendKeys(this.from, Keys.ENTER);
     }
 
     private void setArrivalDestination(String to) {
-        driverMethods.sendKeys(this.to, to);
-        driverMethods.sendKeys(this.to, Keys.ENTER);
+        sendKeys(this.to, to);
+        sendKeys(this.to, Keys.ENTER);
     }
 
     /**
      * Method choose today's day except only for Monday and Friday
      */
     private void chooseDate() {
-        driverMethods.clickOnElement(departure);
+        clickOnElement(departure);
         calendar.setTime(new Date());
         if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
-            driverMethods.clickOnElement(today);
-        } else driverMethods.clickOnElement(tomorrow);
+            clickOnElement(today);
+        } else clickOnElement(tomorrow);
     }
 
     @Override
     public void setupPage(String link) {
-        driverMethods.setupPage(link, acceptCookies);
+        setupPageAndApplyCookies(link, acceptCookies);
     }
 }
 

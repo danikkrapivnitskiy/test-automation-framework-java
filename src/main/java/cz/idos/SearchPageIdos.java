@@ -1,6 +1,6 @@
 package cz.idos;
 
-import browser.DriverMethods;
+import browser.BaseDriverMethods;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 @Slf4j(topic = "|Search page Idos|")
-public class SearchPageIdos{
+public class SearchPageIdos extends BaseDriverMethods {
     private final By detailOfTrip = By.xpath("(//li[@class='expand']//a[@class='ext-expand ico-down'])");
     private final String connectionDetails = "(//a[@class='ext-expand ico-up']//..//..//..//..//div[@class='connection-details ']//ul[@class='reset stations first last'])";
     private final String timeOfStation = "//p[@class='reset time ']";
@@ -23,18 +23,17 @@ public class SearchPageIdos{
     private final By priceErrorMsg = By.xpath("//span[@title = 'Cenu se nepodařilo získat']");
     private final By timeAndDateDeparture = By.xpath("(//h2[@class='reset date'])");
     WebDriver driver;
-    private final DriverMethods driverMethods = new DriverMethods();
 
     public SearchPageIdos(WebDriver driver) {
         this.driver = driver;
     }
 
     public void getInformationOfTrip(Boolean logging) {
-        List<WebElement> elementsDetails = driverMethods.getListOfElements(detailOfTrip);
+        List<WebElement> elementsDetails = getListOfElements(detailOfTrip);
         Assertions.assertTrue(elementsDetails.size() > 0, "No trips available for the selected route ");
         for (int count = 0; count < elementsDetails.size(); count++) {
             elementsDetails.get(count).click();
-            List<WebElement> priceError = driverMethods.getListOfElements(priceErrorMsg);
+            List<WebElement> priceError = getListOfElements(priceErrorMsg);
             Assertions.assertFalse(priceError.size() != 0, "Price is not available");
             if (logging) {
                 logTripDetails(count);
@@ -60,21 +59,21 @@ public class SearchPageIdos{
         Duration duration = Duration.between(timeDeparture, timeArrival);
         log.info("Time of travel: {} hours {} minutes", duration.toHours(), duration.toMinutesPart());
 
-        log.info("Price is: {}", driver.findElements(price).get(count).getText());
+        log.info("Price is: {}", getListOfElements(price).get(count).getText());
     }
 
     private List<WebElement> getTimeElements(int count) {
         String timeStr = String.format(connectionDetails + "[%d]/li" + timeOfStation, count + 1);
-        return driverMethods.getListOfElements(By.xpath(timeStr));
+        return getListOfElements(By.xpath(timeStr));
     }
 
     private List<WebElement> getNameElements(int count) {
         String nameStr = String.format(connectionDetails + "[%d]/li" + nameOfStation, count + 1);
-        return driverMethods.getListOfElements(By.xpath(nameStr));
+        return getListOfElements(By.xpath(nameStr));
     }
 
     public void verifyDateAndTimeDeparture(int hour, int minute) {
-        List<WebElement> elementsDate = driverMethods.getListOfElements(timeAndDateDeparture);
+        List<WebElement> elementsDate = getListOfElements(timeAndDateDeparture);
         Assertions.assertTrue(elementsDate.size() > 0, "No trips available for the selected route ");
 
         LocalTime settingTime = LocalTime.of(hour, minute);

@@ -1,6 +1,6 @@
 package regioJet.gui;
 
-import browser.DriverMethods;
+import browser.BaseDriverMethods;
 import interfaces.MethodsSearchPage;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 @Slf4j(topic = "|Search page RegioJet|")
-public class SearchPageRegioJet implements MethodsSearchPage {
+public class SearchPageRegioJet extends BaseDriverMethods implements MethodsSearchPage {
 
     public final By timeDuration = By.xpath("//span[@class='text-13 lg:text-14']");
     private final String selectItemStr = "(//span[@class='text-13 lg:text-14']//../../div[2])";
@@ -25,13 +25,12 @@ public class SearchPageRegioJet implements MethodsSearchPage {
     public final By timeDepartureAndArrival = By.xpath("(//h2[@class='h3'])");
     private final By soldOut = By.xpath("//div[@class='flex items-center text-13 lg:text-14 flex-wrap text-secondary-redwarn']");
     private final WebDriver driver;
-    private final DriverMethods driverMethods = new DriverMethods();
     public SearchPageRegioJet(WebDriver driver) {
         this.driver = driver;
     }
 
     public int takeDirection(By locator) {
-        List<WebElement> elements = driverMethods.getListOfElements(locator);
+        List<WebElement> elements = getListOfElements(locator);
         log.info("Found {} trip elements", elements.size());
         Assert.assertTrue(!elements.isEmpty(), "No trips available for the selected route");
 
@@ -78,7 +77,7 @@ public class SearchPageRegioJet implements MethodsSearchPage {
     }
 
     public void selectDirection(int index) {
-        List<WebElement> elements = driverMethods.getListOfElements(selectItem);
+        List<WebElement> elements = getListOfElements(selectItem);
         log.info("Found {} trip elements", elements.size());
         Assert.assertTrue(!elements.isEmpty(), "No trips available for the selected route");
         Assert.assertTrue(index >= 0 && index < elements.size(), "Invalid index: " + index);
@@ -88,7 +87,7 @@ public class SearchPageRegioJet implements MethodsSearchPage {
     }
 
     public int getMinimumPrice() {
-        List<WebElement> elements = driverMethods.getListOfElements(selectItem);
+        List<WebElement> elements = getListOfElements(selectItem);
         log.info("Found {} trip elements", elements.size());
         Assert.assertTrue(!elements.isEmpty(), "No trips available for the selected route");
 
@@ -119,10 +118,10 @@ public class SearchPageRegioJet implements MethodsSearchPage {
     }
 
     private String getDepartureAndArrivalTime(int index) {
-        return driverMethods.getTextOfElement(By.xpath(String.format("%s[%d]", timeDepartureAndArrivalStr, index + 1)));
+        return getTextOfElement(By.xpath(String.format("%s[%d]", timeDepartureAndArrivalStr, index + 1)));
     }
 
     private String getPrice(int index) {
-        return driverMethods.getTextOfElement(By.xpath(String.format("%s[%d]", selectItemStr, index + 1)));
+        return getTextOfElement(By.xpath(String.format("%s[%d]", selectItemStr, index + 1)));
     }
 }

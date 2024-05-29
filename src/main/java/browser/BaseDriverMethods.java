@@ -9,36 +9,37 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-@Slf4j(topic = "|Driver common method|")
-public class DriverMethods extends WebDriverFactory{
+@Slf4j(topic = "|Page with common methods|")
+public class BaseDriverMethods extends WebDriverFactory{
     private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    public void setupPage(String link, By cookies) {
+    protected void setupPageAndApplyCookies(String link, By cookies) {
+        log.info("Navigate to page " + link);
         driver.get(link);
         if (cookies != null && !driver.findElements(cookies).isEmpty()) {
             driver.findElement(cookies).click();
         }
     }
-    public void clickOnElement(By locator) {
+    protected void clickOnElement(By locator) {
         log.info("Click on element " + locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
-    public void sendKeys(By locator, CharSequence key) {
+    protected void sendKeys(By locator, CharSequence key) {
         log.info("Send key " + key + " to " + locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).sendKeys(key);
     }
 
-    public void submitElement(By locator) {
+    protected void submitElement(By locator) {
         log.info("Submit element " + locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).submit();
     }
 
-    public List<WebElement> getListOfElements(By locator) {
+    protected List<WebElement> getListOfElements(By locator) {
         log.info("Get list of elements " + locator);
         return driver.findElements(locator);
     }
 
-    public String getTextOfElement(By locator) {
+    protected String getTextOfElement(By locator) {
         log.info("Get text of element " + locator);
         return driver.findElement(locator).getText();
     }
