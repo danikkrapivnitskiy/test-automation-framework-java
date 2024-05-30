@@ -15,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class OpenLibraryStepDef {
-
     protected static WebDriver driver;
     private static OpenLibraryCommon openLibraryCommon;
     private SearchPage searchPage;
@@ -69,6 +68,4 @@ public class OpenLibraryStepDef {
     public void author_api_corresponds_to_web() {
         Assert.assertEquals(author, bookPage.getAuthorOfBook(), "Authors are not equals");
     }
-
-
 }

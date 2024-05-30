@@ -15,8 +15,8 @@ public class BaseDriverMethods extends WebDriverFactory{
     protected void setupPageAndApplyCookies(String link, By cookies) {
         log.info("Navigate to page " + link);
         driver.get(link);
-        if (cookies != null && !driver.findElements(cookies).isEmpty()) {
-            driver.findElement(cookies).click();
+        if (cookies != null && !getListOfElements(cookies).isEmpty()) {
+            clickOnElement(cookies);
         }
     }
     protected void clickOnElement(By locator) {
