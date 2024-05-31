@@ -14,8 +14,8 @@ public class IdosTest extends DriverInitialize {
 
     @BeforeEach
     public void searchDestination() {
-        mainPage = new MainPageIdos(driver);
-        searchPage = new SearchPageIdos(driver);
+        mainPage = new MainPageIdos();
+        searchPage = new SearchPageIdos();
         mainPage.setupPage(URL);
         mainPage.searchDestination("Praha", "Brno");
     }

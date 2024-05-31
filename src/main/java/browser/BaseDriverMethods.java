@@ -12,26 +12,30 @@ import java.util.List;
 @Slf4j(topic = "|Page with common methods|")
 public class BaseDriverMethods extends WebDriverFactory{
     private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    protected void setupPageAndApplyCookies(String link, By cookies) {
+    protected BaseDriverMethods setupPageAndApplyCookies(String link, By cookies) {
         log.info("Navigate to page " + link);
         driver.get(link);
         if (cookies != null && !getListOfElements(cookies).isEmpty()) {
             clickOnElement(cookies);
         }
+        return this;
     }
-    protected void clickOnElement(By locator) {
+    public BaseDriverMethods clickOnElement(By locator) {
         log.info("Click on element " + locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        return this;
     }
 
-    protected void sendKeys(By locator, CharSequence key) {
+    public BaseDriverMethods sendKeys(By locator, CharSequence key) {
         log.info("Send key " + key + " to " + locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).sendKeys(key);
+        return this;
     }
 
-    protected void submitElement(By locator) {
+    public BaseDriverMethods submitElement(By locator) {
         log.info("Submit element " + locator);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).submit();
+        return this;
     }
 
     protected List<WebElement> getListOfElements(By locator) {

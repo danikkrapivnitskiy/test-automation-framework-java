@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
@@ -15,11 +16,12 @@ public class WebDriverFactory {
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";
 
-    protected static WebDriver getDriver(String browser) throws Exception {
+    protected WebDriver getDriver(String browser) throws Exception {
         switch (browser) {
             case CHROME -> {
-                driver = new ChromeDriver();
-                ListenerTestNG.driverThreadLocal.set(driver);
+                ChromeOptions chromeOptions = new ChromeOptions();
+                addChromeOptions(chromeOptions);
+                driver = new ChromeDriver(chromeOptions);
             }
             case FIREFOX -> {
                 driver = new FirefoxDriver();
@@ -28,19 +30,27 @@ public class WebDriverFactory {
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        ListenerTestNG.driverThreadLocal.set(driver);
         return driver;
     }
 
     @SneakyThrows
-    public static WebDriver setUpDriver(String browser) {
+    public WebDriver setUpDriver(String browser) {
         log.info("Setup driver " + browser);
         return getDriver(browser);
     }
 
-    public static void quitDriver() {
+    protected static void quitDriver() {
         if (driver != null) {
             log.info("Driver closed");
             driver.quit();
         }
+    }
+
+    private void addChromeOptions(ChromeOptions chromeOptions) {
+        if (System.getProperty("-Dheadless", "false").equals("true")) {
+            chromeOptions.addArguments("--headless");
+        }
+        chromeOptions.addArguments("--disable-gpu");
     }
 }

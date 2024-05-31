@@ -4,7 +4,6 @@ import browser.BaseDriverMethods;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
@@ -22,11 +21,6 @@ public class SearchPageIdos extends BaseDriverMethods {
     private final By price = By.xpath("(//a[@class='ext-expand ico-up']//..//..//..//..//span[@class='price-skipped'])");
     private final By priceErrorMsg = By.xpath("//span[@title = 'Cenu se nepodařilo získat']");
     private final By timeAndDateDeparture = By.xpath("(//h2[@class='reset date'])");
-    WebDriver driver;
-
-    public SearchPageIdos(WebDriver driver) {
-        this.driver = driver;
-    }
 
     public void getInformationOfTrip(Boolean logging) {
         List<WebElement> elementsDetails = getListOfElements(detailOfTrip);

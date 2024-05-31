@@ -26,7 +26,7 @@ public class OpenLibraryStepDef {
 
     @Before
     public void setup() {
-        driver = WebDriverFactory.setUpDriver("chrome");
+        driver = new WebDriverFactory().setUpDriver("chrome");
         openLibraryCommon = new OpenLibraryCommon(driver);
         searchPage = new SearchPage(driver);
         bookPage = new BookPage(driver);

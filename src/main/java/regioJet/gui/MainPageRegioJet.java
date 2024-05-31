@@ -26,12 +26,7 @@ public class MainPageRegioJet extends BaseDriverMethods implements MethodsMainPa
             "px-2.5 rounded-sm font-bold transition focus:outline-none focus-visible:outline-none focus-visible:shadow-border " +
             "hover:shadow-modal cursor-pointer bg-primary-blue text-white border-none hover:bg-secondary-bluedark " +
             "focus-visible:bg-secondary-bluedark h-12 sm:w-full']");
-    private final WebDriver driver;
     private final Calendar calendar = Calendar.getInstance();
-
-    public MainPageRegioJet(WebDriver driver){
-        this.driver = driver;
-    }
 
     @SneakyThrows
     @Override

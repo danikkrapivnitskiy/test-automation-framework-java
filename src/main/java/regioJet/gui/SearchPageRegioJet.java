@@ -24,10 +24,6 @@ public class SearchPageRegioJet extends BaseDriverMethods implements MethodsSear
     public final String timeDepartureAndArrivalStr = "(//h2[@class='h3'])";
     public final By timeDepartureAndArrival = By.xpath("(//h2[@class='h3'])");
     private final By soldOut = By.xpath("//div[@class='flex items-center text-13 lg:text-14 flex-wrap text-secondary-redwarn']");
-    private final WebDriver driver;
-    public SearchPageRegioJet(WebDriver driver) {
-        this.driver = driver;
-    }
 
     public int takeDirection(By locator) {
         List<WebElement> elements = getListOfElements(locator);

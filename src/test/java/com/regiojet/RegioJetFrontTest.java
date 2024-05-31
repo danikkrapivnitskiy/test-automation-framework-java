@@ -16,8 +16,8 @@ public class RegioJetFrontTest extends DriverInitialize {
 
     @BeforeEach
     public void searchDestination() {
-        mainPage = new MainPageRegioJet(driver);
-        searchPage = new SearchPageRegioJet(driver);
+        mainPage = new MainPageRegioJet();
+        searchPage = new SearchPageRegioJet();
         mainPage.setupPage(URL);
         mainPage.searchDestination("Ostrava", "Brno");
     }
