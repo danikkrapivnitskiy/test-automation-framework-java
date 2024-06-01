@@ -1,6 +1,5 @@
 package browser;
 
-import listener.ListenerTestNG;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +14,7 @@ public class WebDriverFactory {
     static WebDriver driver;
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";
+    public static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     protected WebDriver getDriver(String browser) throws Exception {
         switch (browser) {
@@ -30,7 +30,7 @@ public class WebDriverFactory {
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        ListenerTestNG.driverThreadLocal.set(driver);
+        driverThreadLocal.set(driver);
         return driver;
     }
 
