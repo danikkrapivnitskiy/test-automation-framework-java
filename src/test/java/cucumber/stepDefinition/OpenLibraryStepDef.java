@@ -1,16 +1,16 @@
 package cucumber.stepDefinition;
 
-import browser.WebDriverFactory;
+import browserSetUp.WebDriverFactory;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import openLibriaryPages.api.SearchBookApi;
-import openLibriaryPages.gui.BookPage;
-import openLibriaryPages.gui.OpenLibraryCommon;
-import openLibriaryPages.gui.SearchPage;
+import projects.openLibriaryPages.api.SearchBookApi;
+import projects.openLibriaryPages.gui.BookPage;
+import projects.openLibriaryPages.gui.OpenLibraryCommon;
+import projects.openLibriaryPages.gui.SearchPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 

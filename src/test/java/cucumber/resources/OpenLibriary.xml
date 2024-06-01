@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Cucumber tests" parallel="classes">
     <listeners>
-        <listener class-name="listeners.ListenerAllureTestNG"/>
+        <listener class-name="project.support.listeners.ListenerAllureTestNG"/>
     </listeners>
     <test name="Open library test">
         <classes>
