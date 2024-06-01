@@ -20,7 +20,7 @@
 1. __RegioJet:__ UI and API projects for the RegioJet service.
 2. __Idos:__ UI project for the Idos service.
 3. __MockServer:__ Project for testing the database with created mock server.
-4. __OpenLibriary:__ UI and API tests with Cucumber for the Open Library service.
+4. __OpenLibrary:__ UI and API tests with Cucumber for the Open Library service.
 
 ### Technology Stack
 #### I utilize a powerful set of technologies:
@@ -28,7 +28,7 @@
 2. __Selenium:__ Used for UI automation testing.
 3. __Rest Assured:__ Used for API testing.
 4. __Cucumber:__ A framework for behavior-driven development.
-5. Additional technologies as: JUnit5, TestNG, SL4J and etc.
+5. Additional technologies as: JUnit5, TestNG, Extensions, Listeners, Allure, SL4J and etc.
 
 ### Getting Started:
 #### 1. Clone repository to your directory and navigate to project folder
