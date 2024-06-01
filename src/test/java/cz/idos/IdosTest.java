@@ -1,12 +1,12 @@
 package cz.idos;
 
 import browser.DriverInitialize;
-import extension.FailedTestScreenshotExtension;
+import listeners.ListenerAllureJunit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(FailedTestScreenshotExtension.class)
+@ExtendWith(ListenerAllureJunit.class)
 public class IdosTest extends DriverInitialize {
     private MainPageIdos mainPage;
     private SearchPageIdos searchPage;

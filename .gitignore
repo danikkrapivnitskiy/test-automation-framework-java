@@ -1,6 +1,7 @@
 .idea
 .allure/
 allure-results/
+allure-report
 target/
 chrome-win64/
 chromedriver-win64/
