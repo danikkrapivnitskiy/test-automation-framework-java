@@ -1,0 +1,6 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cucumber main XML runner">
+    <suite-files>
+        <suite-file path="src/test/java/cucumber/resources/OpenLibriary.xml" />
+    </suite-files>
+</suite>

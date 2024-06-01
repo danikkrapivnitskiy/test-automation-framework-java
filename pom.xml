@@ -322,6 +322,9 @@
                             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         </argLine>
                         <useSystemClassLoader>false</useSystemClassLoader>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>src/test/resources/BaseXmlRunner.xml</suiteXmlFile>
+                        </suiteXmlFiles>
                     </configuration>
                     <dependencies>
                         <dependency>
