@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Open Library Cucumber suite" parallel="classes">
+    <listeners>
+        <listener class-name="listeners.ListenerAllureTestNG"/>
+    </listeners>
+    <test name="Open library test">
+        <classes>
+            <class name="runner.TestRunner"/>
+        </classes>
+    </test>
+</suite>

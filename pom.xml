@@ -5,17 +5,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>RegioJet</artifactId>
+    <artifactId>TAF</artifactId>
     <version>1.0.0</version>
     <description>Automation testing project</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>RegioJet</module>
+        <module>MockServer</module>
+        <module>OpenLibrary</module>
+        <module>Idos</module>
+        <module>CommonUtilities</module>
+    </modules>
 
     <properties>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <aspectj.version>1.9.5</aspectj.version>
+        <surefire.plugin.version>3.2.5</surefire.plugin.version>
         <allure-maven.version>2.11.2</allure-maven.version>
         <allure.version>2.25.0</allure.version>
 
@@ -50,7 +60,6 @@
             <artifactId>surefire-api</artifactId>
             <version>3.2.2</version>
         </dependency>
-
         <!-- API -->
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
@@ -83,11 +92,6 @@
             <artifactId>selenium-api</artifactId>
             <version>4.17.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>4.17.0</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -117,65 +121,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.7</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.16.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.16.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-netty -->
-        <dependency>
-            <groupId>org.mock-server</groupId>
-            <artifactId>mockserver-netty</artifactId>
-            <version>5.15.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-client-java -->
-        <dependency>
-            <groupId>org.mock-server</groupId>
-            <artifactId>mockserver-client-java</artifactId>
-            <version>5.15.0</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.maven/maven-model -->
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-model</artifactId>
             <version>3.9.5</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-core</artifactId>
-            <version>7.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>7.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>7.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/gherkin -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>gherkin</artifactId>
-            <version>22.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/datatable -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>datatable</artifactId>
-            <version>7.0.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
         <dependency>
@@ -314,29 +264,18 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
+                    <version>${surefire.plugin.version}</version>
                     <configuration>
                         <forkCount>1</forkCount>
                         <argLine>
                             -Xmx4g -Xms500m -XX:TieredStopAtLevel=1 -XX:-TieredCompilation
                             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         </argLine>
+                        <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
                         <useSystemClassLoader>false</useSystemClassLoader>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>src/test/resources/BaseXmlRunner.xml</suiteXmlFile>
-                        </suiteXmlFiles>
+                        <testFailureIgnore>true</testFailureIgnore>
                     </configuration>
                     <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.surefire</groupId>
-                            <artifactId>surefire-junit-platform</artifactId>
-                            <version>3.0.0-M7</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.maven.surefire</groupId>
-                            <artifactId>surefire-testng</artifactId>
-                            <version>3.2.2</version>
-                        </dependency>
                         <dependency>
                             <groupId>org.aspectj</groupId>
                             <artifactId>aspectjweaver</artifactId>

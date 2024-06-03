@@ -1,8 +1,8 @@
-### Maven Demo Project: A Journey Through Best Practices
+### Test Automation Framework: A Journey Through Best Practices
 
 ---
 
-    This project showcases a robust Maven demo, built with a focus on best practices and a commitment to clean, maintainable code.
+    This multi-module maven project showcases a TAF demo, built with a focus on best practices and a commitment to clean, maintainable code.
 
 ---
 
@@ -20,7 +20,8 @@
 1. __RegioJet:__ UI and API projects for the RegioJet service.
 2. __Idos:__ UI project for the Idos service.
 3. __MockServer:__ Project for testing the database with created mock server.
-4. __OpenLibrary:__ UI and API tests with Cucumber for the Open Library service.
+4. __OpenLibrary:__ UI and API tests with Cucumber for the Open Library service. 
+5. __CommonUtilities:__ Common settings for all projects.
 
 ### Technology Stack
 #### I utilize a powerful set of technologies:
@@ -73,10 +74,5 @@
 #### 6. Take a look at your first test report!
 - Generate allure report
     ```bash
-    allure serve target/allure-results
+    allure serve allure-results
     ```
-### Project Structure:
-1. __mockServer:__ Contains the Mock tests.
-2. __regiojet:__ Contains the RegioJet tests.
-3. __cucumber:__ Contains the Open Library tests, runner, and step definitions.
-4. __idos:__ Contains the Idos tests.
