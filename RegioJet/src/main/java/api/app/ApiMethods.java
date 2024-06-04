@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Slf4j(topic = "|ApiMethods|")
 public class ApiMethods extends Specification {
     private static final String LOCATION_PATH = "/restapi/consts/locations";
@@ -64,5 +66,16 @@ public class ApiMethods extends Specification {
     protected RoutesResponse getMinValueFromResponse(String fieldName, List<RoutesResponse> allValues) {
         log.info("Get min value from the list");
         return allValues.stream().min(getComparator(fieldName)).orElse(null);
+    }
+    protected void checkMinimalValueOfList(String fieldName, RoutesResponse minValue, List<RoutesResponse> allValues) {
+        switch (fieldName) {
+            case "departureTime" ->
+                    assertTrue(allValues.stream().allMatch(r -> r.getDepartureTime().compareTo(minValue.getDepartureTime()) >= 0));
+            case "travelTime" ->
+                    assertTrue(allValues.stream().allMatch(r -> r.getTravelTime().compareTo(minValue.getTravelTime()) >= 0));
+            case "priceFrom" ->
+                    assertTrue(allValues.stream().allMatch(r -> r.getPriceFrom() >= minValue.getPriceFrom()));
+            default -> throw new IllegalArgumentException("Unknown field name: " + fieldName);
+        }
     }
 }

@@ -9,11 +9,9 @@
 ### Core Principles
 
 #### This project embodies the following principles:
-1. OOP
-2. SOLID
-3. DRY
-4. KISS
-5. Framework Development Patterns and etc
+1. Layered Architecture
+2. Framework Development Patterns: POP, OOP, Fabrics and etc
+3. SOLID, DRY, KISS and etc
 
 ### Project Structure
 #### The project is organized into distinct modules:
@@ -24,7 +22,7 @@
 5. __CommonUtilities:__ Common settings for all projects.
 
 ### Technology Stack
-#### I utilize a powerful set of technologies:
+#### Powerful set of technologies:
 1. __Java:__ The core programming language.
 2. __Selenium:__ Used for UI automation testing.
 3. __Rest Assured:__ Used for API testing.

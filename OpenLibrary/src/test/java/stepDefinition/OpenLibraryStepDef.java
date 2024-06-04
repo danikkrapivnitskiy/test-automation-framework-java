@@ -1,11 +1,11 @@
 package stepDefinition;
 
-import api.SearchBookApi;
+import api.core.SearchBookApi;
 import api.Specification;
 import configuration.ConfigProperties;
-import gui.BookPage;
-import gui.OpenLibraryCommon;
-import gui.SearchPage;
+import gui.core.BookPage;
+import gui.core.BasePage;
+import gui.core.SearchPage;
 import ui.WebDriverFactory;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
@@ -18,7 +18,7 @@ import org.testng.Assert;
 
 public class OpenLibraryStepDef {
     protected static WebDriver driver;
-    private static OpenLibraryCommon openLibraryCommon;
+    private static BasePage basePage;
     private SearchPage searchPage;
     private BookPage bookPage;
     private SearchBookApi searchBookApi;
@@ -31,30 +31,30 @@ public class OpenLibraryStepDef {
         driver = new WebDriverFactory().setUpDriver();
         Specification.installSpecification(Specification.requestSpec(ConfigProperties.getOpenLibraryUrl()),
                 Specification.responseSpecOK200());
-        openLibraryCommon = new OpenLibraryCommon(driver);
-        searchPage = new SearchPage(driver);
-        bookPage = new BookPage(driver);
+        basePage = new BasePage();
+        searchPage = new SearchPage();
+        bookPage = new BookPage();
         searchBookApi = new SearchBookApi();
     }
     @AfterAll
     public static void tearDown() {
-        openLibraryCommon.closeBrowser();
+        basePage.closeBrowser();
     }
 
     @Given("User goes to the OpenLibrary page {string}")
     public void user_goes_to_the_open_library_page(String url) {
-        openLibraryCommon.navigateToMainPage(url);
+        basePage.navigateToMainPage(url);
     }
 
     @And("User sets website in {string}")
     public void user_sets_website_in(String language) {
-        openLibraryCommon.setWebsiteToSpecificLanguage(language);
+        basePage.setWebsiteToSpecificLanguage(language);
     }
 
     @When("User searches using Title option for book {string}")
     public void user_search_book(String book){
         searchBook = book;
-        openLibraryCommon.searchTheBook(book);
+        basePage.findBookByName(book);
     }
 
     @And("User choose book published in {int}")
@@ -70,6 +70,6 @@ public class OpenLibraryStepDef {
 
     @Then("Author from API matches author on book page")
     public void author_api_corresponds_to_web() {
-        Assert.assertEquals(author, bookPage.getAuthorOfBook(), "Authors are not equals");
+        Assert.assertEquals(author, bookPage.getBookAuthor(), "Authors are not equals");
     }
 }

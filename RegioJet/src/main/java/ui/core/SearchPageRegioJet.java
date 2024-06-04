@@ -50,17 +50,6 @@ public class SearchPageRegioJet extends Actions implements MethodsSearchPage {
         return minIndex;
     }
 
-    private Optional<LocalTime> extractTimeFromElement(WebElement element) {
-        String timeStr = element.getText();
-        log.info("Parsing time string: {}", timeStr);
-        try {
-            return Optional.of(LocalTime.parse(timeStr.substring(0, 5)));
-        } catch (Exception e) {
-            log.warn("Error parsing time string: {}", timeStr);
-            return Optional.empty();
-        }
-    }
-
     public void selectDirection(int index) {
         List<WebElement> elements = getListOfTrip();
         log.info("Found {} trip elements", elements.size());
@@ -95,10 +84,5 @@ public class SearchPageRegioJet extends Actions implements MethodsSearchPage {
         log.info("Price of the cheapest trip: {}", getPrice(indexPrice));
 
         return indexPrice;
-    }
-
-    private int extractPrice(String priceStr) {
-        String numberOnly = priceStr.replaceAll("\\D+", "");
-        return numberOnly.isEmpty() ? 0 : Integer.parseInt(numberOnly);
     }
 }

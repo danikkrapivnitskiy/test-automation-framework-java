@@ -1,11 +1,14 @@
 package ui.app;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import java.time.LocalTime;
 import java.util.List;
-
+import java.util.Optional;
+@Slf4j(topic = "|Actions RegioJet|")
 public class Actions extends Locators {
     public Actions setDepartureDestination(String fromStr) {
         sendKeys(from, fromStr);
@@ -30,5 +33,22 @@ public class Actions extends Locators {
     }
     protected String getPrice(int index) {
         return getTextOfElement(By.xpath(String.format("%s[%d]", selectItemStr, index + 1)));
+    }
+
+    protected Optional<LocalTime> extractTimeFromElement(WebElement element) {
+        String timeStr = element.getText();
+        log.info("Parsing time string: {}", timeStr);
+        try {
+            return Optional.of(LocalTime.parse(timeStr.substring(0, 5)));
+        } catch (Exception e) {
+            log.warn("Error parsing time string: {}", timeStr);
+            return Optional.empty();
+        }
+    }
+
+    protected int extractPrice(String priceStr) {
+        log.warn("Return price");
+        String numberOnly = priceStr.replaceAll("\\D+", "");
+        return numberOnly.isEmpty() ? 0 : Integer.parseInt(numberOnly);
     }
 }

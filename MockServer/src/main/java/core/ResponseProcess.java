@@ -10,7 +10,6 @@ import static core.DBConfiguration.SELECT;
 
 @Slf4j(topic = "|Response processing|")
 public class ResponseProcess {
-    DbConnection dbConnection = new DbConnection();
 
     public void assertResponseEquals(Response response, Integer expectedStatusCode, String expectedValue) {
         log.info("Response validation");
@@ -25,7 +24,7 @@ public class ResponseProcess {
     }
     public void checkBodyFromSql(Response response, String id) {
         log.info("Check body from SQL");
-        String expectedBody = dbConnection.returnDbInJson(DB.getQuery(), id, SELECT.getQuery());
+        String expectedBody = new DbConnection().returnDbInJson(DB.getQuery(), id, SELECT.getQuery());
         Assert.assertEquals(response.getBody().asString(), expectedBody, "Body are not equals");
     }
     private void checkBodyByExpectedValue(Response response, String expectedValue) {

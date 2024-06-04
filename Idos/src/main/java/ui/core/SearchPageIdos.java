@@ -24,8 +24,8 @@ public class SearchPageIdos extends Actions {
     }
 
     private void logTripDetails(int count) {
-        List<WebElement> time = getTimeElements(count);
-        List<WebElement> name = getNameElements(count);
+        List<WebElement> time = getListStationTime(count);
+        List<WebElement> name = getListStationName(count);
 
         LocalTime timeDeparture = LocalTime.parse(time.get(0).getText(), DateTimeFormatter.ofPattern("H:mm"));
         LocalTime timeArrival = LocalTime.parse(time.get(time.size() - 1).getText(), DateTimeFormatter.ofPattern("H:mm"));

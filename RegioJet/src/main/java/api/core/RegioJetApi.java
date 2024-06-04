@@ -3,10 +3,9 @@ package api.core;
 import api.app.ApiMethods;
 import api.app.RoutesResponse;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Slf4j
 public class RegioJetApi extends ApiMethods {
@@ -16,25 +15,23 @@ public class RegioJetApi extends ApiMethods {
         RoutesResponse minValue = getMinValueFromResponse(fieldName, allValues);
         checkMinimalValueOfList(fieldName, minValue, allValues);
 
-        String result = String.format(
-                "%s test: The route is - departure %s, arrival %s, travel time %s, price %s",
-                fieldName,
-                minValue.getDepartureTime(),
-                minValue.getArrivalTime(),
-                minValue.getTravelTime(),
-                minValue.getPriceFrom()
+        assertAll("Check not null fields and log result",
+                () -> {
+                    assertNotNull(minValue.getDepartureTime());
+                    assertNotNull(minValue.getArrivalTime());
+                    assertNotNull(minValue.getTravelTime());
+                    assertNotNull(minValue.getPriceFrom());
+
+                    String result = String.format(
+                            "%s test: The route is - departure %s, arrival %s, travel time %s, price %s",
+                            fieldName,
+                            minValue.getDepartureTime(),
+                            minValue.getArrivalTime(),
+                            minValue.getTravelTime(),
+                            minValue.getPriceFrom()
+                    );
+                    log.info(result);
+                }
         );
-        log.info(result);
-    }
-    private void checkMinimalValueOfList(String fieldName, RoutesResponse minValue, List<RoutesResponse> allValues) {
-        switch (fieldName) {
-            case "departureTime" ->
-                    assertTrue(allValues.stream().allMatch(r -> r.getDepartureTime().compareTo(minValue.getDepartureTime()) >= 0));
-            case "travelTime" ->
-                    assertTrue(allValues.stream().allMatch(r -> r.getTravelTime().compareTo(minValue.getTravelTime()) >= 0));
-            case "priceFrom" ->
-                    assertTrue(allValues.stream().allMatch(r -> r.getPriceFrom() >= minValue.getPriceFrom()));
-            default -> throw new IllegalArgumentException("Unknown field name: " + fieldName);
-        }
     }
 }

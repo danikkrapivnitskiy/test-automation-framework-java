@@ -11,10 +11,16 @@ public class Locators extends BaseDriverMethods {
     protected final By search = By.xpath("(//button[@class='btn btn-orange btn-small btn-shadow w-full '])");
     protected final By acceptCookies = By.id("didomi-notice-agree-button");
     protected final By detailOfTrip = By.xpath("(//li[@class='expand']//a[@class='ext-expand ico-down'])");
-    protected final String connectionDetails = "(//a[@class='ext-expand ico-up']//..//..//..//..//div[@class='connection-details ']//ul[@class='reset stations first last'])";
+    // Selector for training
+    protected final String connectionDetails = "(//a[@class='ext-expand ico-up']" +
+            "//ancestor::div[@class='connection-head']/following-sibling::div[@class='connection-details ']" +
+            "//ul[@class='reset stations first last'])";
     protected final String timeOfStation = "//p[@class='reset time ']";
     protected final String nameOfStation = "//p[@class='station']";
-    protected final By price = By.xpath("(//a[@class='ext-expand ico-up']//..//..//..//..//span[@class='price-skipped'])");
+    // Selector for training
+    protected final By price = By.xpath("(//a[@class='ext-expand ico-up']" +
+            "//ancestor::div[@class='connection-head']/following-sibling::div[@class='connection-expand']" +
+            "//child::span[@class='price-skipped'])");
     protected final By priceErrorMsg = By.xpath("//span[@title = 'Cenu se nepodařilo získat']");
     protected final By timeAndDateDeparture = By.xpath("(//h2[@class='reset date'])");
 }

@@ -1,6 +1,5 @@
 package api;
 
-
 import api.core.RegioJetApi;
 import configuration.ConfigProperties;
 import listeners.ListenerAllureJunit;

@@ -13,7 +13,7 @@ import java.time.Duration;
 @Slf4j(topic = "|WebDriverFactory|")
 public class WebDriverFactory {
 
-    static WebDriver driver;
+    protected static WebDriver driver;
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";
     public static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
@@ -44,7 +44,7 @@ public class WebDriverFactory {
         return getDriver(browser);
     }
 
-    protected static void quitDriver() {
+    public static void quitDriver() {
         if (driver != null) {
             log.info("Driver closed");
             driver.quit();
