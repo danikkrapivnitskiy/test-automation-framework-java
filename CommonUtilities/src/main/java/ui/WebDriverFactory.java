@@ -20,13 +20,14 @@ public class WebDriverFactory {
     protected WebDriver getDriver(String browser) throws Exception {
         switch (browser) {
             case CHROME -> {
-                WebDriverManager.chromedriver().setup();
+                // Some issue with web driver manager downloading
+//                WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 addChromeOptions(chromeOptions);
                 driver = new ChromeDriver(chromeOptions);
             }
             case FIREFOX -> {
-                WebDriverManager.firefoxdriver().setup();
+//                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }
             default -> throw new Exception("Not correct browser");
