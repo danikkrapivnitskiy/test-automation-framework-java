@@ -5,17 +5,17 @@ import listeners.ListenerAllureJunit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import ui.core.MainPageIdos;
-import ui.core.SearchPageIdos;
+import ui.businessLogic.MainPageBusinessSteps;
+import ui.businessLogic.SearchPageBusinessSteps;
 
 @ExtendWith(ListenerAllureJunit.class)
 public class IdosTest extends BaseTestSetUp {
-    private SearchPageIdos searchPage;
+    private SearchPageBusinessSteps searchPage;
 
     @BeforeEach
     public void searchDestination() {
-        MainPageIdos mainPage = new MainPageIdos();
-        searchPage = new SearchPageIdos();
+        MainPageBusinessSteps mainPage = new MainPageBusinessSteps();
+        searchPage = new SearchPageBusinessSteps();
         mainPage.setupPage(ConfigProperties.getIdosUrl());
         mainPage.searchDestination("Praha", "Brno");
     }

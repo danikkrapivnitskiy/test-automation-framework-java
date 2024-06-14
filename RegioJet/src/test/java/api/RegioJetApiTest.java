@@ -1,6 +1,6 @@
 package api;
 
-import api.core.RegioJetApi;
+import api.businessLogic.RegioJetApi;
 import configuration.ConfigProperties;
 import listeners.ListenerAllureJunit;
 import lombok.extern.slf4j.Slf4j;

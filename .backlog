@@ -1,4 +1,4 @@
-1. Add Quality Gates
+1. Add Quality Gates: SonarQube + Allure TestOps
 2. Add Jenkins/GitLab CI
 3. Add Faker for generating data
 4. Add integration with DB (by entity)

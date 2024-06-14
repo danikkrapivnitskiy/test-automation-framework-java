@@ -18,8 +18,8 @@
 1. __RegioJet:__ UI and API projects for the RegioJet service.
 2. __Idos:__ UI project for the Idos service.
 3. __MockServer:__ Project for testing the database with created mock server.
-4. __OpenLibrary:__ UI and API tests with Cucumber for the Open Library service. 
-5. __CommonUtilities:__ Common settings for all projects.
+4. __CucumberExample:__ UI and API tests with Cucumber for the Open Library service. 
+5. __Util:__ Common settings for all projects.
 
 ### Technology Stack
 #### Powerful set of technologies:

@@ -13,9 +13,9 @@
     <modules>
         <module>RegioJet</module>
         <module>MockServer</module>
-        <module>OpenLibrary</module>
+        <module>CucumberExample</module>
         <module>Idos</module>
-        <module>CommonUtilities</module>
+        <module>Util</module>
     </modules>
 
     <properties>

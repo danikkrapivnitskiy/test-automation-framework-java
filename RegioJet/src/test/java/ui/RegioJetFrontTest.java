@@ -7,18 +7,18 @@ import listeners.ListenerAllureJunit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import ui.core.MainPageRegioJet;
-import ui.core.SearchPageRegioJet;
+import ui.businessLogic.MainPageBusinessSteps;
+import ui.businessLogic.SearchPageBusinessSteps;
 
 @ExtendWith(ListenerAllureJunit.class)
 public class RegioJetFrontTest extends BaseTestSetUp {
-    MainPageRegioJet mainPage;
-    SearchPageRegioJet searchPage;
+    MainPageBusinessSteps mainPage;
+    SearchPageBusinessSteps searchPage;
 
     @BeforeEach
     public void searchDestination() {
-        mainPage = new MainPageRegioJet();
-        searchPage = new SearchPageRegioJet();
+        mainPage = new MainPageBusinessSteps();
+        searchPage = new SearchPageBusinessSteps();
         mainPage.setupPage(ConfigProperties.getRegioJetUrl());
         mainPage.searchDestination("Ostrava", "Brno");
     }

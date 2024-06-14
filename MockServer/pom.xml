@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
-            <artifactId>CommonUtilities</artifactId>
+            <artifactId>Util</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
